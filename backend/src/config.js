@@ -92,8 +92,8 @@ const LIMIT = 2; // Your API key rate limit
 const CHAIN = 'rinkeby'; // only rinkeby or polygon
 
 // REQUIRED CONTRACT DETAILS THAT CANNOT BE UPDATED LATER!
-const CONTRACT_NAME = 'BATANGETH_MINI_NFT';
-const CONTRACT_SYMBOL = 'BMN';
+const CONTRACT_NAME = 'BATANG_ETH_MINI_NFT';
+const CONTRACT_SYMBOL = 'BEMN';
 const METADATA_UPDATABLE = true; // set to false if you don't want to allow metadata updates after minting
 const OWNER_ADDRESS = '0xb4a9391C658bc1d5a4fd7928c5306d16046141f8';
 const TREASURY_ADDRESS = '0xb4a9391C658bc1d5a4fd7928c5306d16046141f8';

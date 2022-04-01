@@ -337,7 +337,8 @@ const startCreating = async () => {
     i <= layerConfigurations[layerConfigurations.length - 1].growEditionSizeTo;
     i++
   ) {
-    abstractedIndexes.push(i);
+    padded = ('000'+i).slice(-4);
+    abstractedIndexes.push(padded);
   }
   if (shuffleLayerConfigurations) {
     abstractedIndexes = shuffle(abstractedIndexes);

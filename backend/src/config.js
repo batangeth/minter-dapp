@@ -106,7 +106,7 @@ const PUBLIC_MINT_START_DATE = "2022-03-20T11:30:48+00:00"; // This is required.
 
 // OPTIONAL CONTRACT DETAILS THAT CAN BE UPDATED LATER.
 const PRESALE_MINT_START_DATE = null; // Optional. Eg: 2022-02-08T11:30:48+00:00
-const ROYALTY_SHARE = 750; // Percentage of the token price that goes to the royalty address. 100 bps = 1%
+const ROYALTY_SHARE = 500; // Percentage of the token price that goes to the royalty address. 100 bps = 1%
 const ROYALTY_ADDRESS = "0xCD8915d79dC1D13F3941cB899c984d2e77A996b0"; // Address that will receive the royalty
 const BASE_URI = null; // only update if you want to manually set the base uri
 const PREREVEAL_TOKEN_URI = null; // only update if you want to manually set the prereveal token uri
@@ -123,6 +123,7 @@ const GENERIC_IMAGE = "https://ipfs.io/ipfs/bafkreibiv6eygqhi3ujhl3yfsglqafukcls
 
 // Automatically set contract address if deployed using the deployContract.js script
 try {
+  
   const rawContractData = fs.readFileSync(
     `${basePath}/build/contract/_contract.json`
   );

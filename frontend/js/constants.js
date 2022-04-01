@@ -3,7 +3,7 @@ const chain = 'rinkeby'; // rinkeby or polygon
 
 const welcome_h1 = "Welcome to the Batang Mini NFT Project!!";
 const welcome_h2 = "Connect to MetaMask to Get Started";
-const welcome_p = 'The Batang Mini NFT Project is a decentralized, open-source project that aims to demonstrate how to develope and launch your own NFT Collection. Follow step by step on the <a href="https://youtube.com/codestackr"  target="_blank" rel="noopener noreferrer">codeSTACKr</a> YouTube channel.';
+const welcome_p = 'Batang ETH also known as BETH, is a project created to showcase Filipino culture through NFT, revolving around the whole concept of art in Filipino culture and more derived from Pinoy work. The first supply to be released consists 5000 generative images for Gen 1 of Beth NFT. The Main reason and root of this project is to help children with Cancer here in the Philippines. Let`s give them Help, Hope and Will to Live. And always remember guys "Enjoy the youthfulness towards adulthood".';
 const h1_presale_coming_soon = "NFT Drop Coming Soon!!";
 const h1_presale_mint = "Pre-Sale Minting Open!!";
 const h1_public_mint = "Public Minting Open!!";

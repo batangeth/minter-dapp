@@ -218,7 +218,7 @@ async function loadInfo() {
   setTimeout(() => {
     const countdownCard = document.querySelector('.countdown');
     countdownCard.classList.add('show-card');
-  }, 1000);
+  }, 5000);
 
   let priceType = '';
   if(chain === 'rinkeby') {

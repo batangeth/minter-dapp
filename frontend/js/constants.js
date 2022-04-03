@@ -1,7 +1,7 @@
 const contractAddress = "0x826aBc58A1205887a25C092F6253FBc28B86d4fD"; //Replace with your own contract address
 const chain = 'polygon'; // rinkeby or polygon
 
-const welcome_h1 = "Welcome to the Batang Mini!";
+const welcome_h1 = "Welcome to Batang Mini!";
 const welcome_h2 = "Connect to MetaMask to Get Started";
 const welcome_p = "";
 const h1_presale_coming_soon = "NFT Drop Coming Soon!!";

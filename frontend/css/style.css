@@ -296,7 +296,7 @@ section {
 }
 
 .total-price-container p {
-  color: var(--accent-color);
+  color: var(--font-color);
 }
 
 /* MINTED CONTAINER */

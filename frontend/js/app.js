@@ -231,10 +231,13 @@ async function loadInfo() {
   const maxPerMint = document.getElementById("maxPerMint");
   const totalSupply = document.getElementById("totalSupply");
   const mintInput = document.getElementById("mintInput");
+  const xsupply = document.getElementById("xsupply");
+  
   
   pricePerMint.innerText = `${price} ${priceType}`;
   maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
   totalSupply.innerText = `${info.deploymentConfig.maxSupply}`;
+  xsupply.innerText = `${info.deploymentConfig.totalSupply}`;
   mintInput.setAttribute("max", info.deploymentConfig.tokensPerMint);
 
   // MINT INPUT

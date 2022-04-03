@@ -23,7 +23,8 @@ window.addEventListener("DOMContentLoaded", async () => {
       accounts = addr;
     });
   }
-
+  
+  /*
   const splide = new Splide(".splide", {
     type: "loop",
     arrows: false,
@@ -36,8 +37,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     autoHeight: true,
   });
   splide.mount();
-  
-
+  */
+ 
   updateConnectStatus();
   if (MetaMaskOnboarding.isMetaMaskInstalled()) {
     window.ethereum.on("accountsChanged", (newAccounts) => {

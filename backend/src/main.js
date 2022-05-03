@@ -136,7 +136,6 @@ const addMetadata = (_dna, _edition) => {
     edition: _edition,
     ...extraMetadata,
     date: dateTime,
-    compiler: "HashLips Art Engine - codeSTACKr Modified",
   };
   if (network == NETWORK.sol) {
     tempMetadata = {
@@ -168,12 +167,22 @@ const addMetadata = (_dna, _edition) => {
   attributesList = [];
 };
 
+function toTitleCase(str) {
+  return str.toLowerCase().split(' ').map(function (word) {
+    return (word.charAt(0).toUpperCase() + word.slice(1));
+  }).join(' ');
+}
+
 const addAttributes = (_element) => {
   let selectedElement = _element.layer.selectedElement;
-  attributesList.push({
-    trait_type: _element.layer.name,
-    value: selectedElement.name,
-  });
+  if (selectedElement.name.trim().toLowerCase() !== "blank"){
+    const type_name = _element.layer.name.split("/");
+    const type_name_split = type_name[1];
+    attributesList.push({
+      trait_type: type_name_split,
+      value: toTitleCase(selectedElement.name),
+    });
+  }
 };
 
 const loadLayerImg = async (_layer) => {
@@ -337,8 +346,7 @@ const startCreating = async () => {
     i <= layerConfigurations[layerConfigurations.length - 1].growEditionSizeTo;
     i++
   ) {
-    padded = ('000'+i).slice(-4);
-    abstractedIndexes.push(padded);
+    abstractedIndexes.push(i);
   }
   if (shuffleLayerConfigurations) {
     abstractedIndexes = shuffle(abstractedIndexes);

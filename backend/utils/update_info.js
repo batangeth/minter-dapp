@@ -19,14 +19,13 @@ const {
   const updateBaseUri = await yesno(`Update images base URI?`);
 
   data.forEach((item) => {
-    padded = ('000'+item).slice(-4);
-    if(updateName) padded.name = `${namePrefix} #${padded.edition}`;
-    if(updateDescription) padded.description = description;
-    if(updateBaseUri) padded.image = `${baseUri}/${padded.edition}.png`;
+    if(updateName) item.name = `${namePrefix} #${item.edition}`;
+    if(updateDescription) item.description = description;
+    if(updateBaseUri) item.image = `${baseUri}/${item.edition}.png`;
   
     fs.writeFileSync(
-      `${basePath}/build/json/${padded.edition}.json`,
-      JSON.stringify(padded, null, 2)
+      `${basePath}/build/json/${item.edition}.json`,
+      JSON.stringify(item, null, 2)
     );
   });
 

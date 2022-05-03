@@ -14,58 +14,31 @@ const baseUri = "ipfs://NewUriToReplace"; // This will be replaced automatically
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 1,
+    growEditionSizeTo: 250,
     layersOrder: [
-      { name: "Earth Background" },
-      { name: "Earth Type" },
-      { name: "Earth Mouth" },
-      { name: "Earth Eyes" },
-      { name: "Earth Hair" },
-      { name: "Earth Special" },
+      { name: "BETH MALE COMMON/BACKGROUND" },
+      { name: "BETH MALE COMMON/OFFHAND" },
+      { name: "BETH MALE COMMON/TYPE" },
+      { name: "BETH MALE COMMON/EYE" },
+      { name: "BETH MALE COMMON/HAIR" },
+      { name: "BETH MALE COMMON/MOUTH" },
+      { name: "BETH MALE COMMON/FACE" },
+      { name: "BETH MALE COMMON/CLOTHING" },
+      { name: "BETH MALE COMMON/EAR" },
+      
     ],
   },
   {
-    growEditionSizeTo: 2,
+    growEditionSizeTo: 500,
     layersOrder: [
-      { name: "Fire Background" },
-      { name: "Fire Type" },
-      { name: "Fire Mouth" },
-      { name: "Fire Eyes" },
-      { name: "Fire Hair" },
-      { name: "Fire Special" },
-    ],
-  },
-  {
-    growEditionSizeTo: 3,
-    layersOrder: [
-      { name: "Water Background" },
-      { name: "Water Type" },
-      { name: "Water Mouth" },
-      { name: "Water Eyes" },
-      { name: "Water Hair" },
-      { name: "Water Special" },
-    ],
-  },
-  {
-    growEditionSizeTo: 4,
-    layersOrder: [
-      { name: "Wind Background" },
-      { name: "Wind Type" },
-      { name: "Wind Mouth" },
-      { name: "Wind Eyes" },
-      { name: "Wind Hair" },
-      { name: "Wind Special" },
-    ],
-  },
-  {
-    growEditionSizeTo: 5000,
-    layersOrder: [
-      { name: "Background" },
-      { name: "Type" },
-      { name: "Mouth" },
-      { name: "Eyes" },
-      { name: "Hair" },
-      { name: "Clothing" },
+      { name: "BETH ON HOOD/BACKGROUND" },
+      { name: "BETH ON HOOD/OFFHAND" },
+      { name: "BETH ON HOOD/TYPE" },
+      { name: "BETH ON HOOD/EYE" },
+      { name: "BETH ON HOOD/CLOTHING" },
+      { name: "BETH ON HOOD/MOUTH" },
+      { name: "BETH ON HOOD/FACE" },
+      { name: "BETH ON HOOD/HAIR" },
     ],
   },
 ];
@@ -110,7 +83,18 @@ const ROYALTY_SHARE = 500; // Percentage of the token price that goes to the roy
 const ROYALTY_ADDRESS = "0xb4a9391C658bc1d5a4fd7928c5306d16046141f8"; // Address that will receive the royalty
 const BASE_URI = null; // only update if you want to manually set the base uri
 const PREREVEAL_TOKEN_URI = null; // only update if you want to manually set the prereveal token uri
-const PRESALE_WHITELISTED_ADDRESSES = ['0xb4a9391C658bc1d5a4fd7928c5306d16046141f8']; // only update if you want to manually set the whitelisted addresses
+const PRESALE_WHITELISTED_ADDRESSES = ['0xb4a9391C658bc1d5a4fd7928c5306d16046141f8',
+'0xb93a1d9c5c8be154f5b3f99451ecf9265b8f5af6',
+'0x541aaeae4eeeb969beb062cf9242876ceb72da3d',
+'0xfb4fdb8ae3fd14391c094880bdf6b8e271a71820',
+'0x3e32c70b82f79dd243dcd32ae9231c2c19f5ae23',
+'0xf19044ab1ff510d6cdb0f6d36bd2d513affe9fd3',
+'0x364528f6b08d36bba202d8420c87e4f3e783b84c',
+'0xefebce9865f300a5c23aaf932218fc9f7891111b',
+'0xb46484d69e2c896665dc155ce11f71f448ffc2c1',
+'0xb6d4dae89cd3e52f49bd35f95a73ad55d019b4f4',
+'0x1007fbc5404a5bfd4eabe1b26d6f9230b58198a2'
+]; // only update if you want to manually set the whitelisted addresses
 
 // ** OPTIONAL **
 let CONTRACT_ADDRESS = "YOUR CONTRACT ADDRESS"; // If you want to manually include it

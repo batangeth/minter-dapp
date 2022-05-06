@@ -102,7 +102,7 @@
             `${basePath}/build/ipfsMetas/_ipfsMetasResponse.json`
           );
           let metaData = JSON.parse(jsonFile);
-          if (metaData.response === "OK") {
+          if (metaData.response === "OK" && metaData.error === null) {
             BASE_URI = metaData.metadata_directory_ipfs_uri;
           } else {
             console.log(
@@ -126,7 +126,7 @@
             `${basePath}/build/ipfsMetasGeneric/_ipfsMetasResponse.json`
           );
           let metaData = JSON.parse(jsonFile);
-          if (metaData.response === "OK") {
+          if (metaData.response === "OK" && metaData.error === null) {
             PREREVEAL_TOKEN_URI = metaData.metadata_uri;
           } else {
             console.log(

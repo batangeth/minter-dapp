@@ -11568,7 +11568,7 @@ header.masthead .masthead-heading {
   float: right;
   width: 100%;
   padding: 0 20px 0 100px;
-  text-align: left;
+  text-align: justify;
 }
 .timeline > li .timeline-panel:before {
   right: auto;
@@ -11808,6 +11808,17 @@ p {
   font-family: Helvetica;
 }
 
+.timeline > li > .timeline-panel > .timeline-heading {
+  text-align: left;
+}
+
+.timeline > li > .timeline-panel > .timeline-body {
+  text-align: justify;
+}
+
+.timeline > li.timeline-inverted > .timeline-panel > .timeline-body {
+  text-align: justify;
+}
 .video-container {
     height: 100%;
     width: 100%;

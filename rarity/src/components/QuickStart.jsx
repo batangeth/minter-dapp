@@ -90,8 +90,7 @@ function HomePage() {
     const results = await topNFTs.find();
     setNFTBalances(NFTBalances.concat(results));
   }
-
-
+  console.log(NFTBalances)
   return (
     
     <>

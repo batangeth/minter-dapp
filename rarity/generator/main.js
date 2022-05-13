@@ -1,8 +1,8 @@
 const Moralis = require("moralis/node");
 const { timer } = require("rxjs");
 
-const serverUrl = "https://tspuibwsyvth.usemoralis.com:2053/server"; //Moralis Server Url here
-const appId = "7210UlZGbjvsDuPLhtt9UZ1eWD4LXjWLv1Ii5w5D"; //Moralis Server App ID here
+const serverUrl = "https://zxcx8wsmj6zl.usemoralis.com:2053/server"; //Moralis Server Url here
+const appId = "Gwc3nrOnTHuZ0sMfEcWeIbAGcwtcHHy6PatOZYzc"; //Moralis Server App ID here
 Moralis.start({ serverUrl, appId });
 
 const resolveLink = (url) => {
@@ -42,7 +42,7 @@ async function generateRarity() {
 // --------------------------------------------->>>>>>>>>>>>>>>>>>
 
   const timer = (ms) => new Promise((res) => setTimeout(res, ms));
-  await timer(1000);
+  await timer(6000);
 
   // for (let i = pageSize; i < totalNum; i = i + pageSize) {
   //   const NFTs = await Moralis.Web3API.token.getAllTokenIds({
@@ -79,7 +79,7 @@ async function generateRarity() {
     //   } catch (error) {
     //     console.log("reSyncMetadata error", error);
     //   }
-    //   await timer(2000);
+    //   await timer(2500);
     // }
 
   //   if(!(xmdata.hasOwnProperty('attributes'))) {
@@ -100,7 +100,7 @@ async function generateRarity() {
   //     } catch (error) {
   //       console.log("reSyncMetadata error", error);
   //     }
-  //     await timer(2000);
+  //     await timer(2500);
   //   }
   // }
 

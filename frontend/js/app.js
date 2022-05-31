@@ -108,6 +108,8 @@ async function checkChain() {
     chainId = 4;
   } else if(chain === 'polygon') {
     chainId = 137;
+  } else if(chain === 'ropsten') {
+    chainId = 3;
   }
   if (window.ethereum.networkVersion !== chainId) {
     try {
@@ -141,6 +143,18 @@ async function checkChain() {
                   chainId: web3.utils.toHex(chainId),
                   nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
                   rpcUrls: ['https://polygon-rpc.com/'],
+                },
+              ],
+            });
+          } else if(chain === 'ropsten') {
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainName: 'Ethereum Testnet Ropsten',
+                  chainId: web3.utils.toHex(chainId),
+                  nativeCurrency: { name: 'ETH', decimals: 18, symbol: 'ETH' },
+                  rpcUrls: ['https://ropsten.infura.io/v3/'],
                 },
               ],
             });
@@ -228,6 +242,8 @@ async function loadInfo() {
     priceType = 'ETH';
   } else if (chain === 'polygon') {
     priceType = 'MATIC';
+  } else if (chain === 'ropsten') {
+    priceType = 'ETH';
   }
   const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
   const pricePerMint = document.getElementById("pricePerMint");
@@ -296,6 +312,8 @@ function setTotalPrice() {
     priceType = 'ETH';
   } else if (chain === 'polygon') {
     priceType = 'MATIC';
+  } else if (chain === 'ropsten') {
+    priceType = 'ETH';
   }
   const price = web3.utils.fromWei(totalPriceWei.toString(), 'ether');
   totalPrice.innerText = `${price} ${priceType}`;

@@ -179,7 +179,7 @@ const addAttributes = (_element) => {
     const type_name = _element.layer.name.split("/");
     const type_name_split = type_name[1];
     attributesList.push({
-      trait_type: type_name_split,
+      trait_type: toTitleCase(type_name_split),
       value: toTitleCase(selectedElement.name),
     });
   }

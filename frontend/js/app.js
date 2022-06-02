@@ -172,6 +172,8 @@ async function loadInfo() {
   const publicMintStart =  await contract.methods.publicDropTime().call();
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
+  window.maxBatchSize = await contract.methods.maxBatchSize().call();
+
   let startTime = "";
   if (publicMintActive) {
     mainHeading.innerText = h1_public_mint;
@@ -290,10 +292,11 @@ async function loadInfo() {
 function setTotalPrice() {
   const mintInput = document.getElementById("mintInput");
   const mintInputValue = parseInt(mintInput.value);
-  const totalPrice = document.getElementById("totalPrice");
-  const mintButton = document.getElementById("mintButton");
   const maxPerMint = document.getElementById("maxPerMint");
   const maxPerMintValue = parseInt(maxPerMint.value);
+  const totalPrice = document.getElementById("totalPrice");
+  const mintButton = document.getElementById("mintButton");
+  
 
   // if(mintInputValue < 1 || mintInputValue > info.deploymentConfig.tokensPerMint) {
   if(mintInputValue < 1 || mintInputValue > maxPerMint) {
@@ -305,7 +308,7 @@ function setTotalPrice() {
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
   
   // const totalPriceWei = BigInt(maxPerMint) * BigInt(mintInputValue);
-  const totalPriceWei = BigInt(maxPerMintValue) * BigInt(mintInputValue);
+  const totalPriceWei = BigInt(maxBatchSize) * BigInt(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {

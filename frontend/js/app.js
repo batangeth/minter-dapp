@@ -173,7 +173,7 @@ async function loadInfo() {
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
   window.maxBatchSize = await contract.methods.maxBatchSize().call();
-  window.pricePerMint = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');;
+  window.pricePerMintRAW = await contract.methods.PRICE().call()
 
   let startTime = "";
   if (publicMintActive) {
@@ -305,7 +305,7 @@ function setTotalPrice() {
     return;
   }
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
-  const totalPriceWei = BigInt(pricePerMint) * BigInt(mintInputValue);
+  const totalPriceWei = Number(pricePerMintRAW) * BigInt(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {

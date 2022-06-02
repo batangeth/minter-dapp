@@ -155,9 +155,11 @@ async function checkChain() {
 }
 
 async function loadInfo() {
-  window.info = await window.contract.methods.getInfo().call();
-  const publicMintActive = await contract.methods.mintingActive().call();
-  const presaleMintActive = await contract.methods.presaleActive().call();
+  // window.info = await window.contract.methods.getInfo().call();
+  // const publicMintActive = await contract.methods.mintingActive().call();
+  // const presaleMintActive = await contract.methods.presaleActive().call();
+  const publicMintActive = await contract.methods.mintingOpen().call();
+  const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
   const xSupplyx = await contract.methods.totalSupply().call();
   const mainHeading = document.getElementById("mainHeading");
   const subHeading = document.getElementById("subHeading");
@@ -166,6 +168,10 @@ async function loadInfo() {
   const mintContainer = document.getElementById("mintContainer");
   const mintButton = document.getElementById("mintButton");
   const spinner = document.getElementById("spinner");
+
+  const publicMintStart =  await contract.methods.publicDropTime().call();
+  const presaleMintStart = await contract.methods.allowlistDropTime().call();
+
 
   let startTime = "";
   if (publicMintActive) {
@@ -176,7 +182,7 @@ async function loadInfo() {
     mintContainer.classList.remove('hidden');
     setTotalPrice();
   } else if (presaleMintActive) {
-    startTime = window.info.runtimeConfig.publicMintStart;
+    startTime = publicMintStart;
     mainHeading.innerText = h1_presale_mint;
     subHeading.innerText = h2_presale_mint;
     
@@ -186,7 +192,8 @@ async function loadInfo() {
         `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
       );
       const merkleJson = await merkleData.json();
-      const whitelisted = await contract.methods.isWhitelisted(window.address, merkleJson).call();
+      // const whitelisted = await contract.methods.isWhitelisted(window.address, merkleJson).call();
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;
@@ -203,7 +210,7 @@ async function loadInfo() {
     }
     setTotalPrice();
   } else {
-    startTime = window.info.runtimeConfig.presaleMintStart;
+    startTime = presaleMintStart;
     mainHeading.innerText = h1_presale_coming_soon;
     subHeading.innerText = h2_presale_coming_soon;
     mainText.innerText = p_presale_coming_soon;
@@ -229,7 +236,8 @@ async function loadInfo() {
   } else if (chain === 'polygon') {
     priceType = 'MATIC';
   }
-  const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
+  // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
+  const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
   const pricePerMint = document.getElementById("pricePerMint");
   const maxPerMint = document.getElementById("maxPerMint");
   const totalSupply = document.getElementById("totalSupply");
@@ -238,10 +246,12 @@ async function loadInfo() {
   
   
   pricePerMint.innerText = `${price} ${priceType}`;
-  maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
-  totalSupply.innerText = `${info.deploymentConfig.maxSupply}`;
+  // maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
+  maxPerMint.innerText = `${await contract.methods.maxBatchSize().call()}`;
+  // totalSupply.innerText = `${info.deploymentConfig.maxSupply}`;
+  totalSupply.innerText = `${await contract.methods.collectionSize().call()}`;
   xsupply.innerText = `${xSupplyx}`;
-  mintInput.setAttribute("max", info.deploymentConfig.tokensPerMint);
+  mintInput.setAttribute("max", await contract.methods.maxBatchSize().call());
 
   // MINT INPUT
   const mintIncrement = document.getElementById("mintIncrement");
@@ -283,13 +293,16 @@ function setTotalPrice() {
   const mintInputValue = parseInt(mintInput.value);
   const totalPrice = document.getElementById("totalPrice");
   const mintButton = document.getElementById("mintButton");
-  if(mintInputValue < 1 || mintInputValue > info.deploymentConfig.tokensPerMint) {
+  
+  // if(mintInputValue < 1 || mintInputValue > info.deploymentConfig.tokensPerMint) {
+  if(mintInputValue < 1 || mintInputValue > await contract.methods.maxBatchSize().call()) {
     totalPrice.innerText = 'INVALID QUANTITY';
     mintButton.disabled = true;
     mintInput.disabled = true;
     return;
   }
-  const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
+  // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
+  const totalPriceWei = BigInt(await contract.methods.maxBatchSize().call()) * BigInt(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {
@@ -310,19 +323,37 @@ async function mint() {
   mintButton.innerHTML = spinner;
 
   const amount = parseInt(document.getElementById("mintInput").value);
-  const value = BigInt(info.deploymentConfig.mintPrice) * BigInt(amount);
-  const publicMintActive = await contract.methods.mintingActive().call();
-  const presaleMintActive = await contract.methods.presaleActive().call();
+  // const value = BigInt(info.deploymentConfig.mintPrice) * BigInt(amount);
+  const value = BigInt(await contract.methods.PRICE().call()) * BigInt(amount);
+  
+  // const publicMintActive = await contract.methods.mintingActive().call();
+  // const presaleMintActive = await contract.methods.presaleActive().call();
+
+  const publicMintActive = await contract.methods.mintingOpen().call();
+  const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
 
   if (publicMintActive) {
     // PUBLIC MINT
     try {
+      // const mintTransaction = await contract.methods
+      //   .mint(amount)
+      //   .send({ from: window.address, value: value.toString() });
+
       const mintTransaction = await contract.methods
-        .mint(amount)
+        .mintToMultiple(window.address, amount)
         .send({ from: window.address, value: value.toString() });
+
       if(mintTransaction) {
         if(chain === 'polygon') {
           const url = `https://polygonscan.com/tx/${mintTransaction.transactionHash}`;
+          const mintedContainer = document.querySelector('.minted-container');
+          const countdownContainer = document.querySelector('.countdown');
+          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+          mintedTxnBtn.href = url;
+          countdownContainer.classList.add('hidden');
+          mintedContainer.classList.remove('hidden');
+        } else if (chain === 'rinkeby') {
+          const url = `https://rinkeby.etherscan.io/tx/${presaleMintTransaction.transactionHash}`;
           const mintedContainer = document.querySelector('.minted-container');
           const countdownContainer = document.querySelector('.countdown');
           const mintedTxnBtn = document.getElementById("mintedTxnBtn");
@@ -354,12 +385,24 @@ async function mint() {
         `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
       );
       const merkleJson = await merkleData.json();
+      // const presaleMintTransaction = await contract.methods
+      //   .presaleMint(amount, merkleJson)
+      //   .send({ from: window.address, value: value.toString() });
+
       const presaleMintTransaction = await contract.methods
-        .presaleMint(amount, merkleJson)
+        .mintToMultiple(window.address, amount, merkleJson)
         .send({ from: window.address, value: value.toString() });
       if(presaleMintTransaction) {
         if(chain === 'polygon') {
           const url = `https://polygonscan.com/tx/${presaleMintTransaction.transactionHash}`;
+          const mintedContainer = document.querySelector('.minted-container');
+          const countdownContainer = document.querySelector('.countdown');
+          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+          mintedTxnBtn.href = url;
+          countdownContainer.classList.add('hidden');
+          mintedContainer.classList.remove('hidden');
+        } else if (chain === 'rinkeby') {
+          const url = `https://rinkeby.etherscan.io/tx/${presaleMintTransaction.transactionHash}`;
           const mintedContainer = document.querySelector('.minted-container');
           const countdownContainer = document.querySelector('.countdown');
           const mintedTxnBtn = document.getElementById("mintedTxnBtn");

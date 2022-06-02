@@ -244,6 +244,8 @@ async function loadInfo() {
   const totalSupply = document.getElementById("totalSupply");
   const mintInput = document.getElementById("mintInput");
   const xsupply = document.getElementById("xsupply");
+  const pprice = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  const pricePerMintVal = document.getElementById("pprice");
   
   
   pricePerMint.innerText = `${price} ${priceType}`;
@@ -253,6 +255,7 @@ async function loadInfo() {
   totalSupply.innerText = `${await contract.methods.collectionSize().call()}`;
   xsupply.innerText = `${xSupplyx}`;
   mintInput.setAttribute("max", await contract.methods.maxBatchSize().call());
+  pricePerMintVal.innerText = `${pprice}`;
 
   // MINT INPUT
   const mintIncrement = document.getElementById("mintIncrement");
@@ -296,8 +299,8 @@ function setTotalPrice() {
   const maxPerMintValue = parseInt(maxPerMint.value);
   const totalPrice = document.getElementById("totalPrice");
   const mintButton = document.getElementById("mintButton");
-  const pricePerMint = await contract.methods.PRICE().call();
-  const pricePerMintValue = web3.utils.fromWei(pricePerMint.toString(), 'ether');
+  const pricePerMint = document.getElementById("pprice");
+  const pricePerMintValue = parseInt(pricePerMint.value);
 
   
 
@@ -318,7 +321,8 @@ function setTotalPrice() {
     priceType = 'MATIC';
   }
   const price = web3.utils.fromWei(totalPriceWei.toString(), 'ether');
-  totalPrice.innerText = `${price} ${priceType}`;
+  // totalPrice.innerText = `${price} ${priceType}`;
+  totalPrice.innerText = `${priceType}`;
   mintButton.disabled = false;
   mintInput.disabled = false;
 }

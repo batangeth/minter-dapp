@@ -293,6 +293,7 @@ function setTotalPrice() {
   const totalPrice = document.getElementById("totalPrice");
   const mintButton = document.getElementById("mintButton");
   const maxPerMint = document.getElementById("maxPerMint");
+  const maxPerMintValue = parseInt(maxPerMint.value);
 
   // if(mintInputValue < 1 || mintInputValue > info.deploymentConfig.tokensPerMint) {
   if(mintInputValue < 1 || mintInputValue > maxPerMint) {
@@ -304,7 +305,7 @@ function setTotalPrice() {
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
   
   // const totalPriceWei = BigInt(maxPerMint) * BigInt(mintInputValue);
-  const totalPriceWei = BigNumber(maxPerMint) * BigInt(mintInputValue);
+  const totalPriceWei = BigInt(maxPerMintValue) * BigInt(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {

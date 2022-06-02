@@ -294,19 +294,21 @@ function setTotalPrice() {
   const mintInputValue = parseInt(mintInput.value);
   const maxPerMint = document.getElementById("maxPerMint");
   const maxPerMintValue = parseInt(maxPerMint.value);
+  const pricePerMint = document.getElementById("pricePerMint");
+  const pricePerMintValue = parseInt(pricePerMint.value);
   const totalPrice = document.getElementById("totalPrice");
   const mintButton = document.getElementById("mintButton");
   
 
   // if(mintInputValue < 1 || mintInputValue > info.deploymentConfig.tokensPerMint) {
-  if(mintInputValue < 1 || mintInputValue > maxPerMint) {
+  if(mintInputValue < 1 || mintInputValue > maxPerMintValue) {
     totalPrice.innerText = 'INVALID QUANTITY';
     mintButton.disabled = true;
     mintInput.disabled = true;
     return;
   }
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
-  const totalPriceWei = BigInt(maxBatchSize) * BigInt(mintInputValue);
+  const totalPriceWei = BigInt(pricePerMintValue) * BigInt(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {
@@ -315,8 +317,7 @@ function setTotalPrice() {
     priceType = 'MATIC';
   }
   const price = web3.utils.fromWei(totalPriceWei.toString(), 'ether');
-  const pricex = totalPriceWei.toString();
-  totalPrice.innerText = `${pricex} ${priceType}`;
+  totalPrice.innerText = `${price} ${priceType}`;
   mintButton.disabled = false;
   mintInput.disabled = false;
 }

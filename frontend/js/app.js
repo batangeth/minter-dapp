@@ -296,8 +296,8 @@ function setTotalPrice() {
   const maxPerMintValue = parseInt(maxPerMint.value);
   const totalPrice = document.getElementById("totalPrice");
   const mintButton = document.getElementById("mintButton");
-  
-  const pricePerMint = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  const pricePerMint = await contract.methods.PRICE().call();
+  const pricePerMintValue = web3.utils.fromWei(pricePerMint.toString(), 'ether');
 
   
 
@@ -309,7 +309,7 @@ function setTotalPrice() {
     return;
   }
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
-  const totalPriceWei = BigInt(pricePerMint) * BigInt(mintInputValue);
+  const totalPriceWei = BigInt(pricePerMintValue) * BigInt(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {

@@ -172,7 +172,6 @@ async function loadInfo() {
   const publicMintStart =  await contract.methods.publicDropTime().call();
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
-
   let startTime = "";
   if (publicMintActive) {
     mainHeading.innerText = h1_public_mint;
@@ -294,9 +293,6 @@ function setTotalPrice() {
   const totalPrice = document.getElementById("totalPrice");
   const mintButton = document.getElementById("mintButton");
   
-
-  
-  // if(mintInputValue < 1 || mintInputValue > info.deploymentConfig.tokensPerMint) {
   if(mintInputValue < 1 || mintInputValue > await contract.methods.maxBatchSize().call()) {
     totalPrice.innerText = 'INVALID QUANTITY';
     mintButton.disabled = true;

@@ -304,7 +304,7 @@ function setTotalPrice() {
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
   
   // const totalPriceWei = BigInt(maxPerMint) * BigInt(mintInputValue);
-  const totalPriceWei = Number(maxPerMint) * Number(mintInputValue);
+  const totalPriceWei = BigInt(maxPerMint) * BigInt(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {

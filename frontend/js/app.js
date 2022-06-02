@@ -294,10 +294,11 @@ function setTotalPrice() {
   const mintInputValue = parseInt(mintInput.value);
   const maxPerMint = document.getElementById("maxPerMint");
   const maxPerMintValue = parseInt(maxPerMint.value);
-  const pricePerMint = document.getElementById("pricePerMint");
-  const pricePerMintValue = parseInt(pricePerMint.value);
   const totalPrice = document.getElementById("totalPrice");
   const mintButton = document.getElementById("mintButton");
+  
+  const pricePerMint = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+
   
 
   // if(mintInputValue < 1 || mintInputValue > info.deploymentConfig.tokensPerMint) {

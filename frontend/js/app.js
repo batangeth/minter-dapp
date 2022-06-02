@@ -315,7 +315,8 @@ function setTotalPrice() {
     priceType = 'MATIC';
   }
   const price = web3.utils.fromWei(totalPriceWei.toString(), 'ether');
-  totalPrice.innerText = `${price} ${priceType}`;
+  const pricex = totalPriceWei.toString();
+  totalPrice.innerText = `${pricex} ${priceType}`;
   mintButton.disabled = false;
   mintInput.disabled = false;
 }

@@ -175,6 +175,14 @@ async function loadInfo() {
   window.maxBatchSize = await contract.methods.maxBatchSize().call();
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 
+  if (publicMintActive === true && presaleMintActive === false){
+    publicMintActive = true;
+    presaleMintActive = false;
+  } else if (publicMintActive === true && presaleMintActive === true) {
+    publicMintActive = false;
+    presaleMintActive = true;
+  }
+
   let startTime = "";
   if (publicMintActive) {
     mainHeading.innerText = h1_public_mint;
@@ -334,6 +342,14 @@ async function mint() {
 
   const publicMintActive = await contract.methods.mintingOpen().call();
   const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
+
+  if (publicMintActive === true && presaleMintActive === false){
+    publicMintActive = true;
+    presaleMintActive = false;
+  } else if (publicMintActive === true && presaleMintActive === true) {
+    publicMintActive = false;
+    presaleMintActive = true;
+  }
 
    if (presaleMintActive) {
     // PRE-SALE MINTING

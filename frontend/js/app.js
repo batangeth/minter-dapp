@@ -268,8 +268,8 @@ async function loadInfo() {
   const presaleMintActivedata = document.getElementById("presaleMintActivedata");
   const publicMintActivedata = document.getElementById("publicMintActivedata");
   
-  presaleMintActivedata.innerText = `${presaleMintActive}`;
-  publicMintActivedata.innerText = `${publicMintActive}`;
+  presaleMintActivedata.innerText = `${presaleMintStatus}`;
+  publicMintActivedata.innerText = `${publicMintStatus}`;
 
 
   pricePerMint.innerText = `${price} ${priceType}`;

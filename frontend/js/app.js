@@ -176,9 +176,6 @@ async function loadInfo() {
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 
 
-  const publicMintStatus = false;
-  const presaleMintStatus = false;
-
   if (publicMintActive === true && presaleMintActive === false){
     const publicMintActive = true;
     const presaleMintActive = false;

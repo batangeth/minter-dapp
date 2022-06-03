@@ -180,11 +180,18 @@ async function loadInfo() {
   const presaleMintStatus = false;
 
   if (publicMintActive === true && presaleMintActive === false){
+    const publicMintActive = true;
+    const presaleMintActive = false;
+
     const publicMintStatus = true;
     const presaleMintStatus = false;
+
   } else if (publicMintActive === true && presaleMintActive === true) {
     const publicMintStatus = false;
     const presaleMintStatus = true;
+
+    const publicMintActive = false;
+    const presaleMintActive = true;
   }
 
   let startTime = "";
@@ -257,6 +264,13 @@ async function loadInfo() {
   const totalSupply = document.getElementById("totalSupply");
   const mintInput = document.getElementById("mintInput");
   const xsupply = document.getElementById("xsupply");
+
+  const presaleMintActivedata = document.getElementById("presaleMintActivedata");
+  const publicMintActivedata = document.getElementById("publicMintActivedata");
+  
+  presaleMintActivedata.innerText = `${presaleMintActive}`;
+  publicMintActivedata.innerText = `${publicMintActive}`;
+
 
   pricePerMint.innerText = `${price} ${priceType}`;
   // maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;

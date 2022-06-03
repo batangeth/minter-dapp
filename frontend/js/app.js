@@ -176,11 +176,11 @@ async function loadInfo() {
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 
   if (publicMintActive === true && presaleMintActive === false){
-    publicMintActive = true;
-    presaleMintActive = false;
+    const publicMintActive = true;
+    const presaleMintActive = false;
   } else if (publicMintActive === true && presaleMintActive === true) {
-    publicMintActive = false;
-    presaleMintActive = true;
+    const publicMintActive = false;
+    const presaleMintActive = true;
   }
 
   let startTime = "";
@@ -344,11 +344,11 @@ async function mint() {
   const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
 
   if (publicMintActive === true && presaleMintActive === false){
-    publicMintActive = true;
-    presaleMintActive = false;
+    const publicMintActive = true;
+    const presaleMintActive = false;
   } else if (publicMintActive === true && presaleMintActive === true) {
-    publicMintActive = false;
-    presaleMintActive = true;
+    const publicMintActive = false;
+    const presaleMintActive = true;
   }
 
    if (presaleMintActive) {

@@ -258,13 +258,6 @@ async function loadInfo() {
   const mintInput = document.getElementById("mintInput");
   const xsupply = document.getElementById("xsupply");
 
-  const presaleMintActivedata = document.getElementById("presaleMintActivedata");
-  const publicMintActivedata = document.getElementById("publicMintActivedata");
-  
-  presaleMintActivedata.innerText = `${presaleMintStatusx}`;
-  publicMintActivedata.innerText = `${publicMintStatusx}`;
-
-
   pricePerMint.innerText = `${price} ${priceType}`;
   // maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
   maxPerMint.innerText = `${await contract.methods.maxBatchSize().call()}`;

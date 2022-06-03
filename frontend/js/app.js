@@ -175,23 +175,27 @@ async function loadInfo() {
   window.maxBatchSize = await contract.methods.maxBatchSize().call();
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 
+
+  const publicMintStatus = true;
+  const presaleMintStatus = false;
+
   if (publicMintActive === true && presaleMintActive === false){
-    const publicMintActive = true;
-    const presaleMintActive = false;
+    const publicMintStatus = true;
+    const presaleMintStatus = false;
   } else if (publicMintActive === true && presaleMintActive === true) {
-    const publicMintActive = false;
-    const presaleMintActive = true;
+    const publicMintStatus = false;
+    const presaleMintStatus = true;
   }
 
   let startTime = "";
-  if (publicMintActive) {
+  if (publicMintStatus) {
     mainHeading.innerText = h1_public_mint;
     mainText.innerText = p_public_mint;
     actionButton.classList.add('hidden');
     mintButton.innerText = button_public_mint;
     mintContainer.classList.remove('hidden');
     setTotalPrice();
-  } else if (presaleMintActive) {
+  } else if (presaleMintStatus) {
     startTime = publicMintStart;
     mainHeading.innerText = h1_presale_mint;
     subHeading.innerText = h2_presale_mint;
@@ -343,15 +347,18 @@ async function mint() {
   const publicMintActive = await contract.methods.mintingOpen().call();
   const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
 
+  const publicMintStatus = true;
+  const presaleMintStatus = false;
+
   if (publicMintActive === true && presaleMintActive === false){
-    const publicMintActive = true;
-    const presaleMintActive = false;
+    const publicMintStatus = true;
+    const presaleMintStatus = false;
   } else if (publicMintActive === true && presaleMintActive === true) {
-    const publicMintActive = false;
-    const presaleMintActive = true;
+    const publicMintStatus = false;
+    const presaleMintStatus = true;
   }
 
-   if (presaleMintActive) {
+   if (presaleMintStatus) {
     // PRE-SALE MINTING
     try {
       const merkleData = await fetch(
@@ -400,7 +407,7 @@ async function mint() {
 
       // console.log(e);
     }
-  } else if (publicMintActive) {
+  } else if (publicMintStatus) {
     // PUBLIC MINT
     try {
       // const mintTransaction = await contract.methods

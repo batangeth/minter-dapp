@@ -176,6 +176,12 @@ async function loadInfo() {
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 
 
+  const publicMintStatus = false;
+  const presaleMintStatus = false;
+
+  let publicMintStatusx = "";
+  let presaleMintStatusx = "";
+
   if (publicMintActive === true && presaleMintActive === false){
     const publicMintActive = true;
     const presaleMintActive = false;
@@ -183,12 +189,18 @@ async function loadInfo() {
     const publicMintStatus = true;
     const presaleMintStatus = false;
 
+    publicMintStatusx = true;
+    presaleMintStatusx = false;
+
   } else if (publicMintActive === true && presaleMintActive === true) {
     const publicMintStatus = false;
     const presaleMintStatus = true;
 
     const publicMintActive = false;
     const presaleMintActive = true;
+
+    publicMintStatusx = false;
+    presaleMintStatusx = true;
   }
 
   let startTime = "";
@@ -265,8 +277,8 @@ async function loadInfo() {
   const presaleMintActivedata = document.getElementById("presaleMintActivedata");
   const publicMintActivedata = document.getElementById("publicMintActivedata");
   
-  presaleMintActivedata.innerText = `${presaleMintStatus}`;
-  publicMintActivedata.innerText = `${publicMintStatus}`;
+  presaleMintActivedata.innerText = `${publicMintStatusx}`;
+  publicMintActivedata.innerText = `${publicMintStatusx}`;
 
 
   pricePerMint.innerText = `${price} ${priceType}`;

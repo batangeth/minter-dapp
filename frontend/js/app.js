@@ -175,32 +175,16 @@ async function loadInfo() {
   window.maxBatchSize = await contract.methods.maxBatchSize().call();
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 
-
-  const publicMintStatus = false;
-  const presaleMintStatus = false;
-
-  let publicMintStatusx = "";
-  let presaleMintStatusx = "";
+  let publicMintStatus = "";
+  let presaleMintStatus = "";
 
   if (publicMintActive === true && presaleMintActive === false){
-    const publicMintActive = true;
-    const presaleMintActive = false;
-
-    const publicMintStatus = true;
-    const presaleMintStatus = false;
-
-    publicMintStatusx = true;
-    presaleMintStatusx = false;
+    publicMintStatus = true;
+    presaleMintStatus = false;
 
   } else if (publicMintActive === true && presaleMintActive === true) {
-    const publicMintStatus = false;
-    const presaleMintStatus = true;
-
-    const publicMintActive = false;
-    const presaleMintActive = true;
-
-    publicMintStatusx = false;
-    presaleMintStatusx = true;
+    publicMintStatus = false;
+    presaleMintStatus = true;
   }
 
   let startTime = "";
@@ -370,15 +354,16 @@ async function mint() {
   const publicMintActive = await contract.methods.mintingOpen().call();
   const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
 
-  const publicMintStatus = true;
-  const presaleMintStatus = false;
+  let publicMintStatus = "";
+  let presaleMintStatus = "";
 
   if (publicMintActive === true && presaleMintActive === false){
-    const publicMintStatus = true;
-    const presaleMintStatus = false;
+    publicMintStatus = true;
+    presaleMintStatus = false;
+
   } else if (publicMintActive === true && presaleMintActive === true) {
-    const publicMintStatus = false;
-    const presaleMintStatus = true;
+    publicMintStatus = false;
+    presaleMintStatus = true;
   }
 
    if (presaleMintStatus) {

@@ -206,7 +206,7 @@ async function loadInfo() {
       //   `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
       // );
       // const merkleJson = await merkleData.json();
-      const merkleJson = "0x6720278014e5c1b6c9f71aa1d0098467cea360c12c0ba855e1b574e8128b6d4f";
+      const merkleJson = ["0x6720278014e5c1b6c9f71aa1d0098467cea360c12c0ba855e1b574e8128b6d4f"];
       // const whitelisted = await contract.methods.isWhitelisted(window.address, merkleJson).call();
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
@@ -374,6 +374,7 @@ async function mint() {
       const presaleMintTransaction = await contract.methods
         .mintToMultiple(window.address, amount, merkleJson)
         .send({ from: window.address, value: value.toString() });
+
       if(presaleMintTransaction) {
         if(chain === 'polygon') {
           const url = `https://polygonscan.com/tx/${presaleMintTransaction.transactionHash}`;

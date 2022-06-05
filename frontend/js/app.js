@@ -202,9 +202,9 @@ async function loadInfo() {
     
     try {
       // CHECK IF WHITELISTED
-      const merkleData = await fetch(
-        `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
-      );
+      // const merkleData = await fetch(
+      //   `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
+      // );
       // const merkleJson = await merkleData.json();
       const merkleJson = "0x6720278014e5c1b6c9f71aa1d0098467cea360c12c0ba855e1b574e8128b6d4f";
       // const whitelisted = await contract.methods.isWhitelisted(window.address, merkleJson).call();

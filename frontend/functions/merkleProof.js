@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 
 const AUTH = process.env.NFTPORT_API_KEY;
-// const include = "merkle_proofs";
+const include = "merkle_proofs";
 
 exports.handler = async (event, context) => {
   const wallet = event.queryStringParameters && event.queryStringParameters.wallet
@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
   };
   const query = new URLSearchParams({
     chain: chain,
-    // include
+    include
   });
   
   const data = await fetch(url + query, options)

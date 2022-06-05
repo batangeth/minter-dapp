@@ -17,11 +17,8 @@ exports.handler = async (event, context) => {
     }
   };
   const query = new URLSearchParams({
-    chain: chain,
-    include
+    chain: chain
   });
-
-  console.log(query);
 
   const data = await fetch(url + query, options)
   const json = await data.json();

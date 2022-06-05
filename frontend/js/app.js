@@ -208,7 +208,7 @@ async function loadInfo() {
       // const merkleJson = await merkleData.json();
       const merkleJson = ["0x6720278014e5c1b6c9f71aa1d0098467cea360c12c0ba855e1b574e8128b6d4f"];
       // const whitelisted = await contract.methods.isWhitelisted(window.address, merkleJson).call();
-      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+      const whitelisted = await contract.methods.isAllowlisted('0xb4a9391C658bc1d5a4fd7928c5306d16046141f8', merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;

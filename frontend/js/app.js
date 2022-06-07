@@ -219,7 +219,7 @@ async function loadInfo() {
         "0x9de97ef889dc2d15dc265aac8653680cfd44b5cc1347f506574e1018233bd7d1"
       ];
       const merkleJson = JSON.stringify(merkleData)
-      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleData).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;
@@ -383,7 +383,7 @@ async function mint() {
       //   .send({ from: window.address, value: value.toString() });
 
       const presaleMintTransaction = await contract.methods
-        .mintToMultiple(window.address, amount, merkleJson)
+        .mintToMultipleAL(window.address, amount, merkleJson)
         .send({ from: window.address, value: value.toString() });
 
       if(presaleMintTransaction) {

@@ -218,7 +218,7 @@ async function loadInfo() {
         "0x4d74856d235ac5105367bd442246f0bc5ccf9a3009b7ba9503a261bc10f12281",
         "0x9de97ef889dc2d15dc265aac8653680cfd44b5cc1347f506574e1018233bd7d1"
       ];
-      const merkleJson = JSON.stringify(itmerkleDataems)
+      const merkleJson = JSON.stringify(merkleData)
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;

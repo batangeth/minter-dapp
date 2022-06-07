@@ -207,18 +207,18 @@ async function loadInfo() {
       // );
       // const merkleJson = await merkleData.json();
       const merkleJson = [
-  '0x6720278014e5c1b6c9f71aa1d0098467cea360c12c0ba855e1b574e8128b6d4f',
-  '0xc4485bfea952aa09583f6e13907cbccd76b5e1acfb7db7900961c9da854300c0',
-  '0xd2a3a9919f09fbeac0df31071eb1571de54e0673ee65f70e054a7aea94811e8c',
-  '0xccee48367a3a3a05848ec86645d21ab3308dfd9c041001b2509b423ac4f267aa',
-  '0xaae1db69b4946071ed61bf432cd7e30022604d86f48518f6bd219eeb80d26c66',
-  '0xeefe16c0b3e620c635757d1b89ef6b21524c4f39a8de31cd66f9457a924713f4',
-  '0x2e7fd1edc9fab915c25f24f1e5ca51352c3813cb4e9876356da68f1f2d832f93',
-  '0xe63e0154088e01e1029bb75e7a77ab9a89fc9ec32f385eba31dd3ff76eb6a039',
-  '0xcb063d34d603cb8a7b8c7dd3212e10e5c84678083098f9806815cde45b4afcff',
-  '0x8518ad2bb2ef2b785aee47a499a0f8bb3a11505b89561a64f29b2ffc2f74dcb7'
+  "0x6720278014e5c1b6c9f71aa1d0098467cea360c12c0ba855e1b574e8128b6d4f",
+  "0xc4485bfea952aa09583f6e13907cbccd76b5e1acfb7db7900961c9da854300c0",
+  "0xd2a3a9919f09fbeac0df31071eb1571de54e0673ee65f70e054a7aea94811e8c",
+  "0xccee48367a3a3a05848ec86645d21ab3308dfd9c041001b2509b423ac4f267aa",
+  "0xaae1db69b4946071ed61bf432cd7e30022604d86f48518f6bd219eeb80d26c66",
+  "0xeefe16c0b3e620c635757d1b89ef6b21524c4f39a8de31cd66f9457a924713f4",
+  "0x2e7fd1edc9fab915c25f24f1e5ca51352c3813cb4e9876356da68f1f2d832f93",
+  "0xe63e0154088e01e1029bb75e7a77ab9a89fc9ec32f385eba31dd3ff76eb6a039",
+  "0xcb063d34d603cb8a7b8c7dd3212e10e5c84678083098f9806815cde45b4afcff",
+  "0x8518ad2bb2ef2b785aee47a499a0f8bb3a11505b89561a64f29b2ffc2f74dcb7"
 ];
-      const whitelisted = await contract.methods.isAllowlisted("0xE15FDbaF05C2A836AFCcb71d062110940e786797", merkleJson).call();
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;

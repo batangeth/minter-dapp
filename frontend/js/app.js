@@ -206,7 +206,7 @@ async function loadInfo() {
       //   `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
       // );
       // const merkleJson = await merkleData.json();
-      const merkleJson = [
+      const merkleData = [
         "0xbc01d58836210d4373b11a9c0c1dd6ce0874d165fc1950703b6b6c2050291147",
         "0x36d08cefd1c39ac83e16fff7d6fc85a49bca32378dcc08160cbdfe9d8480c351",
         "0xe8dd4e8b30b06616ef9a5d175fbe7851987e3a46d3a4eeb7d10117f86c02b0eb",
@@ -218,7 +218,8 @@ async function loadInfo() {
         "0x4d74856d235ac5105367bd442246f0bc5ccf9a3009b7ba9503a261bc10f12281",
         "0x9de97ef889dc2d15dc265aac8653680cfd44b5cc1347f506574e1018233bd7d1"
       ];
-      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson.json()).call();
+      const merkleJson = JSON.stringify(itmerkleDataems)
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;

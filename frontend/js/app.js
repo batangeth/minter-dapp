@@ -207,18 +207,18 @@ async function loadInfo() {
       // );
       // const merkleJson = await merkleData.json();
       const merkleJson = [
-  "0x6720278014e5c1b6c9f71aa1d0098467cea360c12c0ba855e1b574e8128b6d4f",
-  "0xc4485bfea952aa09583f6e13907cbccd76b5e1acfb7db7900961c9da854300c0",
-  "0xd2a3a9919f09fbeac0df31071eb1571de54e0673ee65f70e054a7aea94811e8c",
-  "0xccee48367a3a3a05848ec86645d21ab3308dfd9c041001b2509b423ac4f267aa",
-  "0xaae1db69b4946071ed61bf432cd7e30022604d86f48518f6bd219eeb80d26c66",
-  "0xeefe16c0b3e620c635757d1b89ef6b21524c4f39a8de31cd66f9457a924713f4",
-  "0x2e7fd1edc9fab915c25f24f1e5ca51352c3813cb4e9876356da68f1f2d832f93",
-  "0xe63e0154088e01e1029bb75e7a77ab9a89fc9ec32f385eba31dd3ff76eb6a039",
-  "0xcb063d34d603cb8a7b8c7dd3212e10e5c84678083098f9806815cde45b4afcff",
-  "0x8518ad2bb2ef2b785aee47a499a0f8bb3a11505b89561a64f29b2ffc2f74dcb7"
-];
-      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+        "0xbc01d58836210d4373b11a9c0c1dd6ce0874d165fc1950703b6b6c2050291147",
+        "0x36d08cefd1c39ac83e16fff7d6fc85a49bca32378dcc08160cbdfe9d8480c351",
+        "0xe8dd4e8b30b06616ef9a5d175fbe7851987e3a46d3a4eeb7d10117f86c02b0eb",
+        "0xa9b526294b6e0c3467118dfbfae9dbd44da0d88b73ad2d77927f6eb54c199e57",
+        "0xa4f6316e05120f76abbcd07d32b0a9e40fae90c515fc3d28a9b6a3e3cad53c42",
+        "0xfcaa0d87345bcbca320a51106983f8ddc8598b1b032ddae0b73ca7d6ad340df5",
+        "0xbd0b5591673d21adcfa0e4608cddcc26502241e792454a8654618314d0d9c4dc",
+        "0xc0cd70250760d64dbf2c04329f9619be12ab4773c02f51cbf355c02af2bb6ba8",
+        "0x4d74856d235ac5105367bd442246f0bc5ccf9a3009b7ba9503a261bc10f12281",
+        "0x9de97ef889dc2d15dc265aac8653680cfd44b5cc1347f506574e1018233bd7d1"
+      ];
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson.json()).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;

@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
   const wallet = event.queryStringParameters && event.queryStringParameters.wallet
   const leafNodes = whitelistAddresses.map(addr => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
-  const claimingAddress = keccak256(JSON.stringify(wallet));
+  const claimingAddress = keccak256(wallet);
   const hexProof = merkleTree.getHexProof(claimingAddress);
 
   return {

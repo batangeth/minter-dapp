@@ -206,7 +206,6 @@ async function loadInfo() {
         `/.netlify/functions/merkle_tree/merkleProof/?wallet=${window.address}`
       );
       const merkleJson = await merkleData.json();
-      
 
       // const merkleData = [
       //   "0xf53a4af6dcc2eb07d5c14f43a5ffd0945450f15f63b4224e4e18e92fd79db43a",

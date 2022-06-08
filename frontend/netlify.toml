@@ -1,2 +1,2 @@
 [build]
-  functions = "functions/merkle_tree"
+  functions = "functions"

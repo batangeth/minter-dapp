@@ -22,23 +22,23 @@ exports.handler = async (event, context) => {
     "0xb4a9391C658bc1d5a4fd7928c5306d16046141f8"
   ];
 
-  // const options = {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     Authorization: AUTH
-  //   }
-  // };
-  // const query = new URLSearchParams({
-  //   chain: chain,
-  //   include
-  // });
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: AUTH
+    }
+  };
+  const query = new URLSearchParams({
+    chain: chain,
+    include
+  });
   
-  // const data = await fetch(url + query, options)
-  // const json = await data.json();
-  // const contractInfo = json.contracts.filter(contract => contract.address.toLowerCase() === contract_address.toLowerCase());
-  // const merkleProofs = contractInfo[0].merkle_proofs || {};
-  // const merkleProof = merkleProofs[wallet.toLowerCase()] || [];
+  const data = await fetch(url + query, options)
+  const json = await data.json();
+  const contractInfo = json.contracts.filter(contract => contract.address.toLowerCase() === contract_address.toLowerCase());
+  const merkleProofs = contractInfo[0].merkle_proofs || {};
+  const merkleProof = merkleProofs[wallet.toLowerCase()] || [];
 
 
   const leafNodes = whitelistAddresses.map(addr => keccak256(addr));
@@ -52,6 +52,6 @@ exports.handler = async (event, context) => {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
     },
-    'body': JSON.stringify(hexProof)
+    'body': JSON.stringify(merkleProof)
   }
 }

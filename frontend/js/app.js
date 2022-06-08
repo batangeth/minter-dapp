@@ -206,10 +206,18 @@ async function loadInfo() {
       //   `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
       // );
       // const merkleJson = await merkleData.json();
+
+      // const merkleData = [
+      //   "0xf53a4af6dcc2eb07d5c14f43a5ffd0945450f15f63b4224e4e18e92fd79db43a",
+      //   "0x42d28ad0a855f62ee2c388df56fc14ea056a2583eed698b1d620068c0678dd4a"
+      // ];
+
       const merkleData = [
-        "0xf53a4af6dcc2eb07d5c14f43a5ffd0945450f15f63b4224e4e18e92fd79db43a",
+        "0xb1591967aed668a4b27645ff40c444892d91bf5951b382995d4d4f6ee3a2ce03",
+        "0xbc01d58836210d4373b11a9c0c1dd6ce0874d165fc1950703b6b6c2050291147",
         "0x42d28ad0a855f62ee2c388df56fc14ea056a2583eed698b1d620068c0678dd4a"
       ];
+
       const merkleJson = JSON.stringify(merkleData)
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleData).call();
       if(!whitelisted) {

@@ -1,7 +1,17 @@
+const fetch = require('node-fetch')
+
+const AUTH = process.env.NFTPORT_API_KEY;
+const include = "merkle_proofs";
+
 const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
 
 exports.handler = async (event, context) => {
+  const wallet = event.queryStringParameters && event.queryStringParameters.wallet
+  const chain = event.queryStringParameters && event.queryStringParameters.chain
+  const contract_address = event.queryStringParameters && event.queryStringParameters.contract
+  const url = 'https://api.nftport.xyz/v0/me/contracts/collections?';
+
   let whitelistAddresses = [
     "0xdD870fA1b7C4700F2BD7f44238821C26f7392148",
     "0x583031D1113aD414F02576BD6afaBfb302140225",
@@ -12,10 +22,28 @@ exports.handler = async (event, context) => {
     "0xb4a9391C658bc1d5a4fd7928c5306d16046141f8"
   ];
 
-  const wallet = event.queryStringParameters && event.queryStringParameters.wallet
+  // const options = {
+  //   method: 'GET',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     Authorization: AUTH
+  //   }
+  // };
+  // const query = new URLSearchParams({
+  //   chain: chain,
+  //   include
+  // });
+  
+  // const data = await fetch(url + query, options)
+  // const json = await data.json();
+  // const contractInfo = json.contracts.filter(contract => contract.address.toLowerCase() === contract_address.toLowerCase());
+  // const merkleProofs = contractInfo[0].merkle_proofs || {};
+  // const merkleProof = merkleProofs[wallet.toLowerCase()] || [];
+
+
   const leafNodes = whitelistAddresses.map(addr => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
-  const claimingAddress = keccak256(JSON.stringify(wallet));
+  const claimingAddress = keccak256(wallet);
   const hexProof = merkleTree.getHexProof(claimingAddress);
 
   return {

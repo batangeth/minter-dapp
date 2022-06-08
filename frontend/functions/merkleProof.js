@@ -15,12 +15,8 @@ exports.handler = async (event, context) => {
   const wallet = event.queryStringParameters && event.queryStringParameters.wallet
   const leafNodes = whitelistAddresses.map(addr => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
-  const claimingAddress = keccak256(wallet);
+  const claimingAddress = keccak256(JSON.stringify(wallet));
   const hexProof = merkleTree.getHexProof(claimingAddress);
-
-  const merkleProof = [];
-
-  // console.log(merkleProof);
 
   return {
     'statusCode': 200,
@@ -28,6 +24,6 @@ exports.handler = async (event, context) => {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
     },
-    'body': JSON.stringify(merkleProof)
+    'body': JSON.stringify(hexProof)
   }
 }

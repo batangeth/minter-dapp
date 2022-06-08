@@ -218,7 +218,6 @@ async function loadInfo() {
         "0x42d28ad0a855f62ee2c388df56fc14ea056a2583eed698b1d620068c0678dd4a"
       ];
 
-      const merkleJson = JSON.stringify(merkleData)
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleData).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
@@ -374,16 +373,23 @@ async function mint() {
    if (presaleMintStatus) {
     // PRE-SALE MINTING
     try {
-      const merkleData = await fetch(
-        `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
-      );
-      const merkleJson = await merkleData.json();
+      // const merkleData = await fetch(
+      //   `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
+      // );
+      // const merkleJson = await merkleData.json();
+
       // const presaleMintTransaction = await contract.methods
       //   .presaleMint(amount, merkleJson)
       //   .send({ from: window.address, value: value.toString() });
 
+      const merkleData = [
+        "0xb1591967aed668a4b27645ff40c444892d91bf5951b382995d4d4f6ee3a2ce03",
+        "0xbc01d58836210d4373b11a9c0c1dd6ce0874d165fc1950703b6b6c2050291147",
+        "0x42d28ad0a855f62ee2c388df56fc14ea056a2583eed698b1d620068c0678dd4a"
+      ];
+
       const presaleMintTransaction = await contract.methods
-        .mintToMultipleAL(window.address, amount, merkleJson)
+        .mintToMultipleAL(window.address, amount, merkleData)
         .send({ from: window.address, value: value.toString() });
 
       if(presaleMintTransaction) {

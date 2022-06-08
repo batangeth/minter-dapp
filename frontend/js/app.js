@@ -218,7 +218,7 @@ async function loadInfo() {
       //   "0x42d28ad0a855f62ee2c388df56fc14ea056a2583eed698b1d620068c0678dd4a"
       // ];
 
-      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleData).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;

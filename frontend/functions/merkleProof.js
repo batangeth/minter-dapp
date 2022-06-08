@@ -18,12 +18,16 @@ exports.handler = async (event, context) => {
   const claimingAddress = keccak256(wallet);
   const hexProof = merkleTree.getHexProof(claimingAddress);
 
+  const merkleProof = [hexProof] || [];
+
+  console.log(merkleProof);
+
   return {
     'statusCode': 200,
     'headers': {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
     },
-    'body': JSON.stringify(hexProof)
+    'body': JSON.stringify(merkleProof)
   }
 }

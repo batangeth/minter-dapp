@@ -203,7 +203,7 @@ async function loadInfo() {
     try {
       // CHECK IF WHITELISTED
       const merkleData = await fetch(
-        `/.netlify/functions/merkleProof/?wallet=${window.address}`
+        `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       // UPDATE
       // const merkleJson = await merkleData.json();

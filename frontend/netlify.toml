@@ -1,2 +1,2 @@
 [build]
-  functions = "functions/merkleProof"
+  functions = "functions"

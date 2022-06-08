@@ -18,9 +18,9 @@ exports.handler = async (event, context) => {
   const claimingAddress = keccak256(wallet);
   const hexProof = merkleTree.getHexProof(claimingAddress);
 
-  const merkleProof = [hexProof] || [];
+  const merkleProof = [];
 
-  console.log(merkleProof);
+  // console.log(merkleProof);
 
   return {
     'statusCode': 200,

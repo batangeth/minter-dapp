@@ -52,10 +52,10 @@ console.log('Root Hash: ', rootHash);
 
 // const claimingAddresses = leafNodes[5];
 const claimingAddress = keccak256("0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c");
-const hexProof = merkleTree.getHexProof(claimingAddresses);
+const hexProof = merkleTree.getHexProof(claimingAddress);
 console.log(hexProof);
 
-console.log(merkleTree.verify(hexProof, claimingAddresses, rootHash));
+console.log(merkleTree.verify(hexProof, claimingAddress, rootHash));
 
 
 

@@ -206,7 +206,7 @@ async function loadInfo() {
         `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       // UPDATE
-      // const merkleJson = await merkleData.json();
+      const merkleJson = await merkleData.json();
 
       // const merkleData = [
       //   "0xf53a4af6dcc2eb07d5c14f43a5ffd0945450f15f63b4224e4e18e92fd79db43a",
@@ -219,7 +219,7 @@ async function loadInfo() {
       //   "0x42d28ad0a855f62ee2c388df56fc14ea056a2583eed698b1d620068c0678dd4a"
       // ];
 
-      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleData).call();
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;
         actionButton.innerText = button_presale_mint_not_whitelisted;

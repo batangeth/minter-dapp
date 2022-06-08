@@ -207,16 +207,8 @@ async function loadInfo() {
       // );
       // const merkleJson = await merkleData.json();
       const merkleData = [
-        "0xbc01d58836210d4373b11a9c0c1dd6ce0874d165fc1950703b6b6c2050291147",
-        "0x36d08cefd1c39ac83e16fff7d6fc85a49bca32378dcc08160cbdfe9d8480c351",
-        "0xe8dd4e8b30b06616ef9a5d175fbe7851987e3a46d3a4eeb7d10117f86c02b0eb",
-        "0xa9b526294b6e0c3467118dfbfae9dbd44da0d88b73ad2d77927f6eb54c199e57",
-        "0xa4f6316e05120f76abbcd07d32b0a9e40fae90c515fc3d28a9b6a3e3cad53c42",
-        "0xfcaa0d87345bcbca320a51106983f8ddc8598b1b032ddae0b73ca7d6ad340df5",
-        "0xbd0b5591673d21adcfa0e4608cddcc26502241e792454a8654618314d0d9c4dc",
-        "0xc0cd70250760d64dbf2c04329f9619be12ab4773c02f51cbf355c02af2bb6ba8",
-        "0x4d74856d235ac5105367bd442246f0bc5ccf9a3009b7ba9503a261bc10f12281",
-        "0x9de97ef889dc2d15dc265aac8653680cfd44b5cc1347f506574e1018233bd7d1"
+        "0xf53a4af6dcc2eb07d5c14f43a5ffd0945450f15f63b4224e4e18e92fd79db43a",
+        "0x42d28ad0a855f62ee2c388df56fc14ea056a2583eed698b1d620068c0678dd4a"
       ];
       const merkleJson = JSON.stringify(merkleData)
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleData).call();

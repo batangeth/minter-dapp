@@ -7,7 +7,7 @@ const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
 
 exports.handler = async (event, context) => {
-  const wallet = event.queryStringParameters && event.queryStringParameters.wallet
+  // const wallet = event.queryStringParameters && event.queryStringParameters.wallet
   // const chain = event.queryStringParameters && event.queryStringParameters.chain
   // const contract_address = event.queryStringParameters && event.queryStringParameters.contract
   // const url = 'https://api.nftport.xyz/v0/me/contracts/collections?';
@@ -52,6 +52,6 @@ exports.handler = async (event, context) => {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
     },
-    'body': JSON.stringify(wallet)
+    'body': JSON.stringify([]])
   }
 }

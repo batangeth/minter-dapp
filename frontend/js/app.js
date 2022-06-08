@@ -205,6 +205,7 @@ async function loadInfo() {
       const merkleData = await fetch(
         `/.netlify/functions/merkleProof/?wallet=${window.address}&chain=${chain}&contract=${contractAddress}`
       );
+      // UPDATE
       // const merkleJson = await merkleData.json();
 
       // const merkleData = [

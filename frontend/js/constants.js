@@ -1,3 +1,4 @@
+import { createAlchemyWeb3 } from '@alch/alchemy-web3';
 const contractAddress = "0xEEBbb57A5699a27A8f546CFB7344F0232136Aa6C"; //Replace with your own contract address
 const chain = 'rinkeby'; // rinkeby or polygon
 

@@ -1,5 +1,3 @@
-import { createAlchemyWeb3 } from '@alch/alchemy-web3';
-
 let accounts;
 
 // METAMASK CONNECTION

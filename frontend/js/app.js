@@ -1,3 +1,7 @@
+import { createAlchemyWeb3 } from '@alch/alchemy-web3';
+
+const Web3Alc = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/mphIhoXE1E_OWkC5P7ZyiHNAwVncW2HF");
+
 let accounts;
 
 // METAMASK CONNECTION

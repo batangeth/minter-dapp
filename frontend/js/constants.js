@@ -1,4 +1,3 @@
-import { createAlchemyWeb3 } from '@alch/alchemy-web3';
 const contractAddress = "0xEEBbb57A5699a27A8f546CFB7344F0232136Aa6C"; //Replace with your own contract address
 const chain = 'rinkeby'; // rinkeby or polygon
 
@@ -21,7 +20,7 @@ const button_presale_mint_not_whitelisted = "Get on the Whitelist";
 const button_presale_already_minted = "Join The Community";
 const button_public_mint = "Mint Your NFT";
 const mint_failed = "Minting failed. 😢 Please try again.";
-const Web3Alc = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/mphIhoXE1E_OWkC5P7ZyiHNAwVncW2HF");
+
 
 const abi = [
 	{

@@ -370,7 +370,7 @@ async function mint() {
       // var maxPriority = null;
       // var maxFee = null;
 
-      function testFunction (maxFee, maxPriority){
+      async function testFunction (maxFee, maxPriority){
         const presaleMintTransactionTest = await contract.methods
         .mintToMultipleAL(window.address, amount, merkleJson)
         .send({ from: window.address, 
@@ -392,7 +392,7 @@ async function mint() {
           return presaleMintTransaction;
         });
       });
-      
+
       if(presaleMintTransaction) {
         if(chain === 'polygon') {
           const url = `https://polygonscan.com/tx/${presaleMintTransaction.transactionHash}`;

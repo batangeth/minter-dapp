@@ -366,53 +366,56 @@ async function mint() {
         `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       const merkleJson = await merkleData.json();
-      var maxPriority = null;
-      var maxFee = null;
+
+      // var maxPriority = null;
+      // var maxFee = null;
       
-      // await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
-      //   Web3Alc.eth.getBlock('pending').then((block) => {
-      //     var baseFee = Number(block.baseFeePerGas);
-      //     var maxPriority = Number(tip);
-      //     var maxFee = baseFee + maxPriority;
+      await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
+        Web3Alc.eth.getBlock('pending').then((block) => {
+          var baseFee = Number(block.baseFeePerGas);
+          var maxPriority = Number(tip);
+          var maxFee = baseFee + maxPriority;
 
-      //   });
-      // });
+          const presaleMintTransaction = await contract.methods
+              .mintToMultipleAL(window.address, amount, merkleJson)
+              .send({ from: window.address, 
+                      value: value.toString(),
+                      maxFeePerGas: maxFee,
+                      maxPriorityFeePerGas: maxPriority
+                    });
 
-      const presaleMintTransaction = contract.methods
-        .mintToMultipleAL(window.address, amount, merkleJson)
-        .send({ from: window.address, 
-                value: value.toString(),
-                maxFeePerGas: maxFee,
-                maxPriorityFeePerGas: maxPriority
-              });
+            if(presaleMintTransaction) {
+              if(chain === 'polygon') {
+                const url = `https://polygonscan.com/tx/${presaleMintTransaction.transactionHash}`;
+                const mintedContainer = document.querySelector('.minted-container');
+                const countdownContainer = document.querySelector('.countdown');
+                const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+                mintedTxnBtn.href = url;
+                countdownContainer.classList.add('hidden');
+                mintedContainer.classList.remove('hidden');
+              } else if (chain === 'rinkeby') {
+                const url = `https://rinkeby.etherscan.io/tx/${presaleMintTransaction.transactionHash}`;
+                const mintedContainer = document.querySelector('.minted-container');
+                const countdownContainer = document.querySelector('.countdown');
+                const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+                mintedTxnBtn.href = url;
+                countdownContainer.classList.add('hidden');
+                mintedContainer.classList.remove('hidden');
+              }
+              console.log("Minuted successfully!", `Transaction Hash: ${presaleMintTransaction.transactionHash}`);
+            } else {
+              const mainText = document.getElementById("mainText");
+              mainText.innerText = mint_failed;
+              mintButton.innerText = button_presale_mint_whitelisted;
+              mintButton.disabled = false;
 
-      if(presaleMintTransaction) {
-        if(chain === 'polygon') {
-          const url = `https://polygonscan.com/tx/${presaleMintTransaction.transactionHash}`;
-          const mintedContainer = document.querySelector('.minted-container');
-          const countdownContainer = document.querySelector('.countdown');
-          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
-          mintedTxnBtn.href = url;
-          countdownContainer.classList.add('hidden');
-          mintedContainer.classList.remove('hidden');
-        } else if (chain === 'rinkeby') {
-          const url = `https://rinkeby.etherscan.io/tx/${presaleMintTransaction.transactionHash}`;
-          const mintedContainer = document.querySelector('.minted-container');
-          const countdownContainer = document.querySelector('.countdown');
-          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
-          mintedTxnBtn.href = url;
-          countdownContainer.classList.add('hidden');
-          mintedContainer.classList.remove('hidden');
-        }
-        console.log("Minuted successfully!", `Transaction Hash: ${presaleMintTransaction.transactionHash}`);
-      } else {
-        const mainText = document.getElementById("mainText");
-        mainText.innerText = mint_failed;
-        mintButton.innerText = button_presale_mint_whitelisted;
-        mintButton.disabled = false;
+              console.log("Failed to mint!");
+            }
 
-        console.log("Failed to mint!");
-      }
+        });
+      });
+
+      
     } catch(e) {
       const mainText = document.getElementById("mainText");
       mainText.innerText = mint_failed;

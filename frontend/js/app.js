@@ -388,8 +388,8 @@ async function mint() {
           var baseFee = Number(block.baseFeePerGas);
           var maxPriority = Number(tip);
           var maxFee = baseFee + maxPriority;
-          const presaleMintTransaction = testFunction (maxFee, maxPriority);
-          return presaleMintTransaction;
+          const presaleMintTransactionx = testFunction (maxFee, maxPriority);
+          return presaleMintTransactionx;
         });
       });
 

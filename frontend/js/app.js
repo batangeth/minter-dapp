@@ -379,7 +379,7 @@ async function mint() {
           var maxPriority = Number(tip);
           var maxFee = baseFee + maxPriority;
 
-          presaleMintTransaction = await contract.methods
+          presaleMintTransaction = contract.methods
           .mintToMultipleAL(window.address, amount, merkleJson)
           .send({ from: window.address, 
                   value: value.toString(),

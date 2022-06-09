@@ -372,21 +372,21 @@ async function mint() {
       var maxPriority = null;
       var maxFee = null;
 
-      await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
+      const presaleMintTransaction = await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
         Web3Alc.eth.getBlock('pending').then((block) => {
           baseFee = Number(block.baseFeePerGas);
           maxPriority = Number(tip);
           maxFee = baseFee + maxPriority;
-        });
-      });
 
-      const presaleMintTransaction = await contract.methods
+          contract.methods
           .mintToMultipleAL(window.address, amount, merkleJson)
           .send({ from: window.address, 
                   value: value.toString(),
                   maxFeePerGas: maxFee,
                   maxPriorityFeePerGas: maxPriority
                 });
+        });
+      });
 
       
 

@@ -367,56 +367,49 @@ async function mint() {
       );
       const merkleJson = await merkleData.json();
       
-
-      var baseFee = null;
-      var maxPriority = null;
-      var maxFee = null;
-
-      const presaleMintTransaction = await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
+      await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
         Web3Alc.eth.getBlock('pending').then((block) => {
           baseFee = Number(block.baseFeePerGas);
           maxPriority = Number(tip);
           maxFee = baseFee + maxPriority;
 
-          contract.methods
+        const presaleMintTransaction = contract.methods
           .mintToMultipleAL(window.address, amount, merkleJson)
           .send({ from: window.address, 
                   value: value.toString(),
                   maxFeePerGas: maxFee,
                   maxPriorityFeePerGas: maxPriority
                 });
+
+        if(presaleMintTransaction) {
+          if(chain === 'polygon') {
+            const url = `https://polygonscan.com/tx/${presaleMintTransaction.transactionHash}`;
+            const mintedContainer = document.querySelector('.minted-container');
+            const countdownContainer = document.querySelector('.countdown');
+            const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+            mintedTxnBtn.href = url;
+            countdownContainer.classList.add('hidden');
+            mintedContainer.classList.remove('hidden');
+          } else if (chain === 'rinkeby') {
+            const url = `https://rinkeby.etherscan.io/tx/${presaleMintTransaction.transactionHash}`;
+            const mintedContainer = document.querySelector('.minted-container');
+            const countdownContainer = document.querySelector('.countdown');
+            const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+            mintedTxnBtn.href = url;
+            countdownContainer.classList.add('hidden');
+            mintedContainer.classList.remove('hidden');
+          }
+          console.log("Minuted successfully!", `Transaction Hash: ${presaleMintTransaction.transactionHash}`);
+        } else {
+          const mainText = document.getElementById("mainText");
+          mainText.innerText = mint_failed;
+          mintButton.innerText = button_presale_mint_whitelisted;
+          mintButton.disabled = false;
+  
+          console.log("Failed to mint!");
+        }
         });
       });
-
-      
-
-      if(presaleMintTransaction) {
-        if(chain === 'polygon') {
-          const url = `https://polygonscan.com/tx/${presaleMintTransaction.transactionHash}`;
-          const mintedContainer = document.querySelector('.minted-container');
-          const countdownContainer = document.querySelector('.countdown');
-          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
-          mintedTxnBtn.href = url;
-          countdownContainer.classList.add('hidden');
-          mintedContainer.classList.remove('hidden');
-        } else if (chain === 'rinkeby') {
-          const url = `https://rinkeby.etherscan.io/tx/${presaleMintTransaction.transactionHash}`;
-          const mintedContainer = document.querySelector('.minted-container');
-          const countdownContainer = document.querySelector('.countdown');
-          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
-          mintedTxnBtn.href = url;
-          countdownContainer.classList.add('hidden');
-          mintedContainer.classList.remove('hidden');
-        }
-        console.log("Minuted successfully!", `Transaction Hash: ${presaleMintTransaction.transactionHash}`);
-      } else {
-        const mainText = document.getElementById("mainText");
-        mainText.innerText = mint_failed;
-        mintButton.innerText = button_presale_mint_whitelisted;
-        mintButton.disabled = false;
-
-        console.log("Failed to mint!");
-      }
     } catch(e) {
       const mainText = document.getElementById("mainText");
       mainText.innerText = mint_failed;

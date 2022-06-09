@@ -1,3 +1,5 @@
+import { createAlchemyWeb3 } from '@alch/alchemy-web3';
+
 let accounts;
 
 // METAMASK CONNECTION
@@ -366,10 +368,26 @@ async function mint() {
         `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       const merkleJson = await merkleData.json();
+      
+      const presaleMintTransaction = false;
 
-      const presaleMintTransaction = await contract.methods
-        .mintToMultipleAL(window.address, amount, merkleJson)
-        .send({ from: window.address, value: value.toString() });
+      await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
+        Web3Alc.eth.getBlock('pending').then((block) => {
+          var baseFee = Number(block.baseFeePerGas);
+          var maxPriority = Number(tip);
+          var maxFee = baseFee + maxPriority;
+
+          presaleMintTransaction = await contract.methods
+          .mintToMultipleAL(window.address, amount, merkleJson)
+          .send({ from: window.address, 
+                  value: value.toString(),
+                  maxFeePerGas: maxFee,
+                  maxPriorityFeePerGas: maxPriority
+                });
+        });
+      });
+
+      
 
       if(presaleMintTransaction) {
         if(chain === 'polygon') {

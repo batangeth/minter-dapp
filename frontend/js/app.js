@@ -389,6 +389,8 @@ async function mint() {
           var maxPriority = Number(tip);
           var maxFee = baseFee + maxPriority;
           const presaleMintTransactionx = testFunction (maxFee, maxPriority);
+
+          console.log("Max Fee: " + maxFee + " Max Priority: " + maxPriority)
           return presaleMintTransactionx;
         });
       });

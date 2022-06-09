@@ -366,12 +366,14 @@ async function mint() {
         `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       const merkleJson = await merkleData.json();
-
+      var maxPriority = null;
+      var maxFee = null;
+      
       // await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
       //   Web3Alc.eth.getBlock('pending').then((block) => {
-      //     baseFee = Number(block.baseFeePerGas);
-      //     maxPriority = Number(tip);
-      //     maxFee = baseFee + maxPriority;
+      //     var baseFee = Number(block.baseFeePerGas);
+      //     var maxPriority = Number(tip);
+      //     var maxFee = baseFee + maxPriority;
 
       //   });
       // });

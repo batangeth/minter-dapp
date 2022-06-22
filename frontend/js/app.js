@@ -206,7 +206,7 @@ async function loadInfo() {
         `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       const merkleJson = await merkleData.json();
-
+      console.log(merkleJson);
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;

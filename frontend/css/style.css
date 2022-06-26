@@ -8,8 +8,8 @@
   --font-primary: "Poppins", sans-serif;
   --font-secondary: "Arvo", serif;
   --font-code: "Roboto", monospace;
-  --bg-color: #00163f;
-  --bg-color-transparent: #00163f80;
+  --bg-color: #32a8d3;
+  --bg-color-transparent: #49b5dd;
   --font-color: #ffffff;
   --btn-bg-color: #ffffff;
   --accent-color: #be7efe;
@@ -24,7 +24,7 @@
 }
 
 body {
-  background-image: url("./images/BACKGROUND.png");
+  background-image: url("../images/BACKGROUND.png");
   background-repeat: repeat;
   background-color: var(--bg-color);
   display: flex;

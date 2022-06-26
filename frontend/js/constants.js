@@ -1,7 +1,7 @@
-const contractAddress = "0xCF142b38aA5827e400736a5388BC5227c0eBc94c"; //Replace with your own contract address
+const contractAddress = "0x53B0A1501D3383081E1f1D0073C118E8888cE4E9"; //Replace with your own contract address
 const chain = 'rinkeby'; // rinkeby or polygon
 
-const welcome_h1 = "Welcome to Batang Palengke!";
+const welcome_h1 = "Welcome to Batang Donut!";
 const welcome_h2 = "Connect to MetaMask to Get Started";
 const welcome_p = "";
 const h1_presale_coming_soon = "NFT Drop Coming Soon!!";

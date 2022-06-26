@@ -24,6 +24,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /*
   const splide = new Splide(".splide", {
     type: "loop",
     arrows: false,
@@ -35,7 +36,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     width: '30vw',
     autoHeight: true,
   });
-  splide.mount();
+  splide.mount();*/
 
   updateConnectStatus();
   if (MetaMaskOnboarding.isMetaMaskInstalled()) {

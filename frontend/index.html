@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Batang Mini</title>
+    <title>CodeCats</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,41 +37,41 @@
             <img src="images/x-icon/favicon-32x32.png" alt="logo" />
           </a>
         </div>
-        <div id="menu">
-        <a
-          href="https://discord.gg/batangeth"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="images/header/discord.webp" alt="Discord" />
-        </a>
-        <a
-          href="https://twitter.com/Batang_ETH"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="images/header/twitter.webp" alt="Twitter" />
-        </a>
-        <a
-          href="https://opensea.io/collection/batang-eth-mini-nft"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="images/header/opensea.webp" alt="Opensea" />
-        </a>
-      </div>
+        <div class="menu">
+          <a
+            href="https://discord.gg/A9CnsVzzkZ"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="images/header/discord.webp" alt="Discord" />
+          </a>
+          <a
+            href="https://twitter.com/codeSTACKr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="images/header/twitter.webp" alt="Twitter" />
+          </a>
+          <a
+            href="https://opensea.io/collection/codecats"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="images/header/opensea.webp" alt="Opensea" />
+          </a>
+          <button class="wallet-btn btn" id="connectWallet">
+            <span>Connect Wallet</span>
+          </button>
+        </div>
       </div>
     </header>
 
     <section class="container not-connected">
       <div>
         <h2 id="welcomeH2">Connect to MetaMask to Get Started</h2>
-        <h1 id="welcomeH1">Welcome to the Batang Mini NFT Project!</h1>
-        <p id="welcomeP"></p>
+        <h1 id="welcomeH1">Welcome to the CodeCats NFT Project!</h1>
         <p id="welcomeP">
-          <button class="wallet-btn btn" id="connectWallet">
-            <span>Connect Wallet</span>
-          </button>
+          The CodeCats NFT Project is a decentralized, open-source project that aims to demonstrate how to develope and launch your own NFT Collection. Follow step by step on the <a href="https://youtube.com/codestackr"  target="_blank" rel="noopener noreferrer">codeSTACKr</a> YouTube channel.
         </p>
       </div>
     </section>
@@ -108,17 +108,17 @@
         </p>
         <a
           id="actionButton"
-          href="https://discord.gg/batangeth"
+          href="https://discord.gg/A9CnsVzzkZ"
           target="_blank"
           rel="noopener noreferrer"
           class="hero-btn btn"
-          ><span>Join the Batang ETH community</span>
+          ><span>Join the Catmmunity</span>
         </a>
         <div id="mintContainer" class="mint-container hidden">
           <div class="info-container">
             <div>
               <h3>Supply</h3>
-              <p><a id="xsupply">100</a>/<a id="totalSupply">100</a></p>
+              <p id="totalSupply">100</p>
             </div>
             <div>
               <h3>Price Per Mint</h3>
@@ -161,7 +161,7 @@
         <p>View it in the collection:</p>
         <a
           id="mintedLinkBtn"
-          href="https://opensea.io/collection/batang-eth-mini-nft"
+          href="https://testnets.opensea.io/collection/teststackr-collection"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -171,8 +171,7 @@
     </section>
 
     <div id="spinner" class="dot-spin"></div>
-    
-    <!--
+
     <div class="splide">
       <div class="splide__track">
         <ul class="splide__list">
@@ -206,13 +205,12 @@
         </ul>
       </div>
     </div>
-    -->
 
     <script src="js/metamask-onboarding.bundle.js"></script>
-    <script src="js/alchemyWeb3.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/splide.min.js"></script>
     <script src="js/constants.js"></script>
+    <script src="js/abi.js"></script>
     <script src="js/countdown.js"></script>
     <script src="js/app.js"></script>
   </body>

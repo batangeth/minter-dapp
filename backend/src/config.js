@@ -8,7 +8,7 @@ const network = NETWORK.eth;
 
 // General metadata for Ethereum
 const namePrefix = "";
-const description = "Batang Donut \nBETH x MetaDonuts Degen Collection \nConsist of 1500 generated NFT. A degen collaboration that aims to provide artist platform and digital art materials for aspiring artist in the metaverse.";
+const description = "Batang Donut - BETH x MetaDonuts Degen Collection Consist of 1500 generated NFT. A degen collaboration that aims to provide artist platform and digital art materials for aspiring artist in the metaverse.";
 
 const baseUri = "ipfs://NewUriToReplace"; // This will be replaced automatically
 
@@ -95,7 +95,7 @@ const PREREVEAL_TOKEN_URI = null; // only update if you want to manually set the
 const PRESALE_WHITELISTED_ADDRESSES = ['0xb4a9391C658bc1d5a4fd7928c5306d16046141f8','0x17Ca3D67b7AD32a3c83bAd88b509AE3D8C8371c4']; // only update if you want to manually set the whitelisted addresses
 
 // ** OPTIONAL **
-let CONTRACT_ADDRESS = "YOUR CONTRACT ADDRESS"; // If you want to manually include it
+let CONTRACT_ADDRESS = "0x53B0A1501D3383081E1f1D0073C118E8888cE4E9"; // If you want to manually include it
 
 // Generic Metadata is optional if you want to reveal your NFTs
 const GENERIC = true; // Set to true if you want to upload generic metas and reveal the real NFTs in the future

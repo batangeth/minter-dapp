@@ -206,22 +206,35 @@ async function loadInfo() {
         `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       const merkleJson = await merkleData.json();
-      const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
-      if(!whitelistClaimed){
-        const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
-        if(!whitelisted) {
-          mainText.innerText = p_presale_mint_not_whitelisted;
-          actionButton.innerText = button_presale_mint_not_whitelisted;
-        } else {
-          mainText.innerText = p_presale_mint_whitelisted;
-          actionButton.classList.add('hidden');
-          mintButton.innerText = button_presale_mint_whitelisted;
-          mintContainer.classList.remove('hidden');
-        }
+      // const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
+      
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+      if(!whitelisted) {
+        mainText.innerText = p_presale_mint_not_whitelisted;
+        actionButton.innerText = button_presale_mint_not_whitelisted;
       } else {
-        mainText.innerText = p_presale_mint_already_minted;
-        actionButton.innerText = button_presale_already_minted;
+        mainText.innerText = p_presale_mint_whitelisted;
+        actionButton.classList.add('hidden');
+        mintButton.innerText = button_presale_mint_whitelisted;
+        mintContainer.classList.remove('hidden');
       }
+
+
+      // if(!whitelistClaimed){
+      //   const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+      //   if(!whitelisted) {
+      //     mainText.innerText = p_presale_mint_not_whitelisted;
+      //     actionButton.innerText = button_presale_mint_not_whitelisted;
+      //   } else {
+      //     mainText.innerText = p_presale_mint_whitelisted;
+      //     actionButton.classList.add('hidden');
+      //     mintButton.innerText = button_presale_mint_whitelisted;
+      //     mintContainer.classList.remove('hidden');
+      //   }
+      // } else {
+      //   mainText.innerText = p_presale_mint_already_minted;
+      //   actionButton.innerText = button_presale_already_minted;
+      // }
     } catch(e) {
       console.log(e);
       mainText.innerText = p_presale_mint_already_minted;

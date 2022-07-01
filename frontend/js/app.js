@@ -208,6 +208,7 @@ async function loadInfo() {
       const merkleJson = await merkleData.json();
       // const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
       
+      console.log(window.address);
       console.log(merkleJson);
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {

@@ -180,8 +180,8 @@ async function loadInfo() {
   // const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
   // const maxBatchSize = await contract.methods.maxBatchSize().call();
 
-  let price = "";
-  let maxBatchSize = "";
+  let price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  let maxBatchSize = await contract.methods.maxBatchSize().call();
 
   if (usingEarlyMintIncentive){
     price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');

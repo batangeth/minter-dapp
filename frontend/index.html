@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Batang Donut</title>
+    <title>Batang Mini</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,31 +37,28 @@
             <img src="images/x-icon/favicon-32x32.png" alt="logo" />
           </a>
         </div>
-        <div class="menu">
-          <a
-            href="https://discord.gg/batangeth"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src="images/header/discord.webp" alt="Discord" />
-          </a>
-          <a
-            href="https://twitter.com/Batang_ETH"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src="images/header/twitter.webp" alt="Twitter" />
-          </a>
-          <a
-            href="https://opensea.io/collection/batang-donut"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src="images/header/opensea.webp" alt="Opensea" />
-          </a>
-          <button class="wallet-btn btn" id="connectWallet">
-            <span>Connect Wallet</span>
-          </button>
+        <div id="menu">
+        <a
+          href="https://discord.gg/batangeth"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="images/header/discord.webp" alt="Discord" />
+        </a>
+        <a
+          href="https://twitter.com/Batang_ETH"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="images/header/twitter.webp" alt="Twitter" />
+        </a>
+        <a
+          href="https://opensea.io/collection/batang-eth-mini-nft"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="images/header/opensea.webp" alt="Opensea" />
+        </a>
         </div>
       </div>
     </header>
@@ -69,13 +66,12 @@
     <section class="container not-connected">
       <div>
         <h2 id="welcomeH2">Connect to MetaMask to Get Started</h2>
-        <h1 id="welcomeH1">Welcome to Batang Donut!</h1>
+        <h1 id="welcomeH1">Welcome to the Batang Mini NFT Project!</h1>
+        <p id="welcomeP"></p>
         <p id="welcomeP">
-          Terms and Condition:
-          <p>1. Batang Donut will open its minting site for 1 month. </p>
-          <p>2. Raffle giveaway will start once the project solds out;</p>
-          <p>3. Incase of non-soldout, percentage from the total revenue will be used to continue the raffle giveaway within a span of 1 month.</p>
-          <p>4. 1 NFT = 1 Raffle entry</p>
+          <button class="wallet-btn btn" id="connectWallet">
+            <span>Connect Wallet</span>
+          </button>
         </p>
       </div>
     </section>
@@ -108,7 +104,7 @@
         </div>
         <h1 id="mainHeading">NFT Drop Coming Soon!!</h1>
         <p id="mainText">
-          A new batch of cute donuts will be available very soon!
+          A new batch of cute cats will be available very soon!
         </p>
         <a
           id="actionButton"
@@ -116,13 +112,13 @@
           target="_blank"
           rel="noopener noreferrer"
           class="hero-btn btn"
-          ><span>Join the Community</span>
+          ><span>Join the Batang ETH community</span>
         </a>
         <div id="mintContainer" class="mint-container hidden">
           <div class="info-container">
             <div>
               <h3>Supply</h3>
-              <p id="totalSupply">100</p>
+              <p><a id="xsupply">100</a>/<a id="totalSupply">100</a></p>
             </div>
             <div>
               <h3>Price Per Mint</h3>
@@ -165,7 +161,7 @@
         <p>View it in the collection:</p>
         <a
           id="mintedLinkBtn"
-          href="https://opensea.io/collection/batang-donut"
+          href="https://opensea.io/collection/batang-eth-mini-nft"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -175,8 +171,8 @@
     </section>
 
     <div id="spinner" class="dot-spin"></div>
-
-    <!-- 
+    
+    <!--
     <div class="splide">
       <div class="splide__track">
         <ul class="splide__list">
@@ -213,6 +209,7 @@
     -->
 
     <script src="js/metamask-onboarding.bundle.js"></script>
+    <script src="js/alchemyWeb3.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/splide.min.js"></script>
     <script src="js/constants.js"></script>

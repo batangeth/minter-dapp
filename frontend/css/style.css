@@ -8,11 +8,11 @@
   --font-primary: "Poppins", sans-serif;
   --font-secondary: "Arvo", serif;
   --font-code: "Roboto", monospace;
-  --bg-color: #32a8d3;
-  --bg-color-transparent: #68c6e8;
+  --bg-color: #1a1919;
+  --bg-color-transparent: #262525;
   --font-color: #ffffff;
   --btn-bg-color: #ffffff;
-  --accent-color: #006185;
+  --accent-color: #262525;
   --header-shadow: var(--accent-color) 0px 0px 5px;
   --card-shadow: var(--accent-color) 0px 0px 20px;
 }
@@ -24,8 +24,6 @@
 }
 
 body {
-  background-image: url("../images/BG.jpg");
-  background-repeat: repeat;
   background-color: var(--bg-color);
   display: flex;
   flex-flow: column;
@@ -64,7 +62,7 @@ header .container {
 }
 
 /* NOT CONNECTED */
-/* .not-connected {
+/*.not-connected {
   align-items: center;
   height: 100%;
   text-align: center;
@@ -72,7 +70,7 @@ header .container {
   opacity: 0;
   transform: translateY(10vh);
   transition: all 0.5s ease-in-out;
-} */
+}*/
 
 .not-connected {
   align-items: center;
@@ -298,7 +296,7 @@ section {
 }
 
 .total-price-container p {
-  color: var(--accent-color);
+  color: var(--font-color);
 }
 
 /* MINTED CONTAINER */

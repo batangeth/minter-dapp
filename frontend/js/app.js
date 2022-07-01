@@ -172,8 +172,18 @@ async function loadInfo() {
   const publicMintStart =  await contract.methods.publicDropTime().call();
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
-  window.maxBatchSize = await contract.methods.maxBatchSize().call();
   window.pricePerMintRAW = await contract.methods.PRICE().call()
+
+  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
+
+  const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  const maxBatchSize = await contract.methods.maxBatchSize().call();
+
+  if (usingEarlyMintIncentive){
+    price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
+    maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+    window.maxBatchSize = await contract.methods.EARLY_MINT_PRICE().call();
+  }
 
   let publicMintStatus = "";
   let presaleMintStatus = "";
@@ -271,10 +281,6 @@ async function loadInfo() {
     priceType = 'MATIC';
   }
   // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
-  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
-
-  const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
-  const maxBatchSize = await contract.methods.maxBatchSize().call();
   
   if (usingEarlyMintIncentive){
     price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
@@ -344,13 +350,6 @@ function setTotalPrice() {
     mintButton.disabled = true;
     mintInput.disabled = true;
     return;
-  }
-
-  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
-  const maxBatchSize = await contract.methods.maxBatchSize().call();
-  
-  if (usingEarlyMintIncentive){
-    maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
   }
 
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);

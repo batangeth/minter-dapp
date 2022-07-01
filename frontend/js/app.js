@@ -208,6 +208,7 @@ async function loadInfo() {
       const merkleJson = await merkleData.json();
       // const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
       
+      console.log(merkleJson);
       const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
       if(!whitelisted) {
         mainText.innerText = p_presale_mint_not_whitelisted;

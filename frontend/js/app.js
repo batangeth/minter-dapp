@@ -271,7 +271,16 @@ async function loadInfo() {
     priceType = 'MATIC';
   }
   // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
+  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
+
   const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  const maxBatchSize = await contract.methods.maxBatchSize().call();
+  
+  if (usingEarlyMintIncentive){
+    const price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
+    const maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+  }
+  
   const pricePerMint = document.getElementById("pricePerMint");
   const maxPerMint = document.getElementById("maxPerMint");
   const totalSupply = document.getElementById("totalSupply");
@@ -280,11 +289,11 @@ async function loadInfo() {
 
   pricePerMint.innerText = `${price} ${priceType}`;
   // maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
-  maxPerMint.innerText = `${await contract.methods.maxBatchSize().call()}`;
+  maxPerMint.innerText = `${maxBatchSize}`;
   // totalSupply.innerText = `${info.deploymentConfig.maxSupply}`;
   totalSupply.innerText = `${await contract.methods.collectionSize().call()}`;
   xsupply.innerText = `${xSupplyx}`;
-  mintInput.setAttribute("max", await contract.methods.maxBatchSize().call());
+  mintInput.setAttribute("max", maxBatchSize);
 
   // MINT INPUT
   const mintIncrement = document.getElementById("mintIncrement");
@@ -419,9 +428,7 @@ async function mint() {
       const presaleMintTransaction = await contract.methods
         .mintToMultipleAL(window.address, amount, merkleJson)
         .send({ from: window.address, 
-                value: value.toString(),
-                maxFeePerGas: maxFee,
-                maxPriorityFeePerGas: maxPriority
+                value: value.toString()
               });
 
       if(presaleMintTransaction) {

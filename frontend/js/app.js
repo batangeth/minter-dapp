@@ -173,6 +173,7 @@ async function loadInfo() {
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
   window.pricePerMintRAW = await contract.methods.PRICE().call()
+  window.maxBatchSize = await contract.methods.PRICE().call();
 
   const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
 
@@ -180,8 +181,8 @@ async function loadInfo() {
   const maxBatchSize = await contract.methods.maxBatchSize().call();
 
   if (usingEarlyMintIncentive){
-    price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
-    maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+    const price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
+    const maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
     window.maxBatchSize = await contract.methods.EARLY_MINT_PRICE().call();
   }
 

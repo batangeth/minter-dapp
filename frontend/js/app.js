@@ -277,8 +277,8 @@ async function loadInfo() {
   const maxBatchSize = await contract.methods.maxBatchSize().call();
   
   if (usingEarlyMintIncentive){
-    const price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
-    const maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+    price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
+    maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
   }
   
   const pricePerMint = document.getElementById("pricePerMint");
@@ -345,8 +345,16 @@ function setTotalPrice() {
     mintInput.disabled = true;
     return;
   }
+
+  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
+  const maxBatchSize = await contract.methods.maxBatchSize().call();
+  
+  if (usingEarlyMintIncentive){
+    maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+  }
+
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
-  const totalPriceWei = Number(pricePerMintRAW) * Number(mintInputValue);
+  const totalPriceWei = Number(maxBatchSize) * Number(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {

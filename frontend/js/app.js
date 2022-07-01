@@ -283,11 +283,6 @@ async function loadInfo() {
   }
   // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
   
-  if (usingEarlyMintIncentive){
-    price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
-    maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
-  }
-  
   const pricePerMint = document.getElementById("pricePerMint");
   const maxPerMint = document.getElementById("maxPerMint");
   const totalSupply = document.getElementById("totalSupply");

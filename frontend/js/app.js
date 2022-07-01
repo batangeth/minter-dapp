@@ -353,7 +353,7 @@ function setTotalPrice() {
   }
 
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
-  const totalPriceWei = Number(maxBatchSize) * Number(mintInputValue);
+  const totalPriceWei = Number(price) * Number(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {
@@ -375,7 +375,7 @@ async function mint() {
 
   const amount = parseInt(document.getElementById("mintInput").value);
   // const value = BigInt(info.deploymentConfig.mintPrice) * BigInt(amount);
-  const value = BigInt(uPrice) * BigInt(amount);
+  const value = Number(uPrice) * Number(amount);
   console.log(value);
   
   // const publicMintActive = await contract.methods.mintingActive().call();

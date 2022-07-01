@@ -172,9 +172,9 @@ async function loadInfo() {
   const publicMintStart =  await contract.methods.publicDropTime().call();
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
-  window.pricePerMintRAW = await contract.methods.PRICE().call()
-  window.maxBatchSize = await contract.methods.PRICE().call();
-
+  window.pricePerMintRAW = await contract.methods.PRICE().call();
+  window.maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+  window.uPrice = await contract.methods.PRICE().call();
   const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
 
   // const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
@@ -187,6 +187,7 @@ async function loadInfo() {
     price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
     maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
     window.maxBatchSize = await contract.methods.EARLY_MINT_PRICE().call();
+    window.uPrice = await contract.methods.EARLY_MINT_PRICE().call();
   }
 
   let publicMintStatus = "";
@@ -374,7 +375,7 @@ async function mint() {
 
   const amount = parseInt(document.getElementById("mintInput").value);
   // const value = BigInt(info.deploymentConfig.mintPrice) * BigInt(amount);
-  const value = BigInt(await contract.methods.PRICE().call()) * BigInt(amount);
+  const value = BigInt(uPrice) * BigInt(amount);
   
   // const publicMintActive = await contract.methods.mintingActive().call();
   // const presaleMintActive = await contract.methods.presaleActive().call();

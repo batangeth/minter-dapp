@@ -1,0 +1,9 @@
+Layer
+
+background
+type
+face
+eye
+clothing
+mouth
+hair

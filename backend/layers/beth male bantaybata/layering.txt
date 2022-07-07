@@ -1,0 +1,11 @@
+Layer
+
+background
+offhand
+type
+eye
+headgear
+hair
+face
+mouth
+clothing

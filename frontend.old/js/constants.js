@@ -21,10 +21,6 @@ const button_presale_already_minted = "Join The Community";
 const button_public_mint = "Mint Your NFT";
 const mint_failed = "Minting failed. 😢 Please try again.";
 
-const createAlchemyWeb3 = AlchemyWeb3.createAlchemyWeb3;
-const Web3Alc = createAlchemyWeb3("https://eth-rinkeby.alchemyapi.io/v2/mphIhoXE1E_OWkC5P7ZyiHNAwVncW2HF");
-
-
 const abi = [
 	{
 		"inputs": [],

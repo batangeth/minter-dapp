@@ -1,0 +1,11 @@
+Layer
+
+background
+type
+clothing
+eye
+face
+mouth
+ear
+hair
+headgear

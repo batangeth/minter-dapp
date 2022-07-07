@@ -375,32 +375,6 @@ async function mint() {
       var maxPriority = null;
       var maxFee = null;
 
-      // async function testFunction (maxFee, maxPriority){
-      //   const presaleMintTransactionTest = await contract.methods
-      //   .mintToMultipleAL(window.address, amount, merkleJson)
-      //   .send({ from: window.address, 
-      //           value: value.toString(),
-      //           maxFeePerGas: maxFee,
-      //           maxPriorityFeePerGas: maxPriority
-      //         });
-
-      //   return presaleMintTransactionTest;
-
-      // }
-      
-      // const presaleMintTransaction = await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
-      //   Web3Alc.eth.getBlock('pending').then((block) => {
-      //     var baseFee = Number(block.baseFeePerGas);
-      //     var maxPriority = Number(tip);
-      //     var maxFee = baseFee + maxPriority;
-      //     const presaleMintTransactionx = testFunction (maxFee, maxPriority);
-
-      //     console.log("Max Fee: " + maxFee + " Max Priority: " + maxPriority)
-      //     return presaleMintTransactionx;
-      //   });
-      // });
-
-
       const presaleMintTransaction = await contract.methods
         .mintToMultipleAL(window.address, amount, merkleJson)
         .send({ from: window.address, 

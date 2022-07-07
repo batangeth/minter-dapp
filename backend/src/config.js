@@ -8,51 +8,30 @@ const network = NETWORK.eth;
 
 // General metadata for Ethereum
 const namePrefix = "";
-const description = "Batang Donut - BETH x MetaDonuts Degen Collection Consist of 1500 generated NFT. A degen collaboration that aims to provide artist platform and digital art materials for aspiring artist in the metaverse.";
+const description = 'Batang ETH, also known as BETH, is a project initiated to showcase Filipino culture through the art of NFT. The project`s name was derived from the Filipino word "bata," which means "kid," and ETH from the short form of Ethereum — a decentralized, open-source blockchain with smart contract functionality. Its first collection supply consists of 5000 generative Batang ETH NFT that are drawn by the inspiration of the great artwork of Azuki. Moreover, the project aims to give children with cancer in the Philippines the help, hope, and heart to live.';
 
 const baseUri = "ipfs://NewUriToReplace"; // This will be replaced automatically
 
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 1,
+    growEditionSizeTo: 20,
     layersOrder: [
-      { name: "gintong donut/background" },
-      { name: "gintong donut/feet" },
-      { name: "gintong donut/type" },
-      { name: "gintong donut/eye" },
-      { name: "gintong donut/head" },
-      { name: "gintong donut/mouth" },
-      { name: "gintong donut/offhands" },
-    ],
-  },
-  {
-    growEditionSizeTo: 750,
-    layersOrder: [
-      { name: "metadonut/background" },
-      { name: "metadonut/feet" },
-      { name: "metadonut/type" },
-      { name: "metadonut/eye" },
-      { name: "metadonut/mouth" },
-      { name: "metadonut/head" },
-      { name: "metadonut/offhands" },
-    ],
-  },
-  {
-    growEditionSizeTo: 1500,
-    layersOrder: [
-      { name: "metadonut2/background" },
-      { name: "metadonut2/feet" },
-      { name: "metadonut2/type" },
-      { name: "metadonut2/eye" },
-      { name: "metadonut2/head" },
-      { name: "metadonut2/mouth" },
-      { name: "metadonut2/offhands" },
+      { name: "beth male salakot/background" },
+      { name: "beth male salakot/offhand" },
+      { name: "beth male salakot/type" },
+      { name: "beth male salakot/eye" },
+      { name: "beth male salakot/hair" },
+      { name: "beth male salakot/face" },
+      { name: "beth male salakot/mouth" },
+      { name: "beth male salakot/clothing" },
+      { name: "beth male salakot/ear" },
+      { name: "beth male salakot/headgear" },
     ],
   },
 ];
 
-const shuffleLayerConfigurations = true;
+const shuffleLayerConfigurations = false;
 
 const debugLogs = false;
 

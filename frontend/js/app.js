@@ -173,6 +173,7 @@ async function loadInfo() {
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
   console.log(presaleMintStart);
+  console.log(Date.now());
   window.maxBatchSize = await contract.methods.maxBatchSize().call();
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 

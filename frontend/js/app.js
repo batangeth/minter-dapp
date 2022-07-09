@@ -172,10 +172,13 @@ async function loadInfo() {
   const publicMintStart =  await contract.methods.publicDropTime().call();
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
-  console.log(presaleMintStart);
-  console.log(Math.floor(Date.now() / 1000));
+  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call()
   window.maxBatchSize = await contract.methods.maxBatchSize().call();
   window.pricePerMintRAW = await contract.methods.PRICE().call()
+
+  if (usingEarlyMintIncentive){
+    window.pricePerMintRAW = await contract.methods.EARLY_MINT_PRICE().call()
+  }
 
   let publicMintStatus = "";
   let presaleMintStatus = "";
@@ -258,7 +261,10 @@ async function loadInfo() {
     priceType = 'MATIC';
   }
   // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
-  const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  let price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  if (usingEarlyMintIncentive){
+    price = await contract.methods.EARLY_MINT_PRICE().call()
+  }
   const pricePerMint = document.getElementById("pricePerMint");
   const maxPerMint = document.getElementById("maxPerMint");
   const totalSupply = document.getElementById("totalSupply");
@@ -346,7 +352,12 @@ async function mint() {
 
   const amount = parseInt(document.getElementById("mintInput").value);
   // const value = BigInt(info.deploymentConfig.mintPrice) * BigInt(amount);
-  const value = BigInt(await contract.methods.PRICE().call()) * BigInt(amount);
+  
+  let value = BigInt(await contract.methods.PRICE().call()) * BigInt(amount);
+
+  if (usingEarlyMintIncentive){
+    value = BigInt(await contract.methods.EARLY_MINT_PRICE().call()) * BigInt(amount);
+  }
   
   // const publicMintActive = await contract.methods.mintingActive().call();
   // const presaleMintActive = await contract.methods.presaleActive().call();

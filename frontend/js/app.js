@@ -353,7 +353,7 @@ async function mint() {
   const amount = parseInt(document.getElementById("mintInput").value);
   // const value = BigInt(info.deploymentConfig.mintPrice) * BigInt(amount);
   
-  let value = BigInt(await contract.methods.PRICE().call()) * BigInt(amount);
+  let value = BigInt(await contract.methods.PRICE().call()) * BigInt(amount); 
 
   if (usingEarlyMintIncentive){
     value = BigInt(await contract.methods.EARLY_MINT_PRICE().call()) * BigInt(amount);

@@ -172,8 +172,23 @@ async function loadInfo() {
   const publicMintStart =  await contract.methods.publicDropTime().call();
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
 
-  window.maxBatchSize = await contract.methods.maxBatchSize().call();
-  window.pricePerMintRAW = await contract.methods.PRICE().call()
+  window.pricePerMintRAW = await contract.methods.PRICE().call();
+  window.maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+  window.uPrice = await contract.methods.PRICE().call();
+  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
+
+  // const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  // const maxBatchSize = await contract.methods.maxBatchSize().call();
+
+  let price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  let maxBatchSize = await contract.methods.maxBatchSize().call();
+
+  if (usingEarlyMintIncentive){
+    price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether');
+    maxBatchSize = await contract.methods.MAX_WALLET_MINTS().call();
+    window.maxBatchSize = await contract.methods.EARLY_MINT_PRICE().call();
+    window.uPrice = await contract.methods.EARLY_MINT_PRICE().call();
+  }
 
   let publicMintStatus = "";
   let presaleMintStatus = "";
@@ -206,22 +221,37 @@ async function loadInfo() {
         `/.netlify/functions/merkleTree/?wallet=${window.address}`
       );
       const merkleJson = await merkleData.json();
-      const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
-      if(!whitelistClaimed){
-        const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
-        if(!whitelisted) {
-          mainText.innerText = p_presale_mint_not_whitelisted;
-          actionButton.innerText = button_presale_mint_not_whitelisted;
-        } else {
-          mainText.innerText = p_presale_mint_whitelisted;
-          actionButton.classList.add('hidden');
-          mintButton.innerText = button_presale_mint_whitelisted;
-          mintContainer.classList.remove('hidden');
-        }
+      // const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
+      
+      console.log(window.address);
+      console.log(merkleJson);
+      const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+      if(!whitelisted) {
+        mainText.innerText = p_presale_mint_not_whitelisted;
+        actionButton.innerText = button_presale_mint_not_whitelisted;
       } else {
-        mainText.innerText = p_presale_mint_already_minted;
-        actionButton.innerText = button_presale_already_minted;
+        mainText.innerText = p_presale_mint_whitelisted;
+        actionButton.classList.add('hidden');
+        mintButton.innerText = button_presale_mint_whitelisted;
+        mintContainer.classList.remove('hidden');
       }
+
+
+      // if(!whitelistClaimed){
+      //   const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+      //   if(!whitelisted) {
+      //     mainText.innerText = p_presale_mint_not_whitelisted;
+      //     actionButton.innerText = button_presale_mint_not_whitelisted;
+      //   } else {
+      //     mainText.innerText = p_presale_mint_whitelisted;
+      //     actionButton.classList.add('hidden');
+      //     mintButton.innerText = button_presale_mint_whitelisted;
+      //     mintContainer.classList.remove('hidden');
+      //   }
+      // } else {
+      //   mainText.innerText = p_presale_mint_already_minted;
+      //   actionButton.innerText = button_presale_already_minted;
+      // }
     } catch(e) {
       console.log(e);
       mainText.innerText = p_presale_mint_already_minted;
@@ -256,7 +286,7 @@ async function loadInfo() {
     priceType = 'MATIC';
   }
   // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
-  const price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
+  
   const pricePerMint = document.getElementById("pricePerMint");
   const maxPerMint = document.getElementById("maxPerMint");
   const totalSupply = document.getElementById("totalSupply");
@@ -265,11 +295,11 @@ async function loadInfo() {
 
   pricePerMint.innerText = `${price} ${priceType}`;
   // maxPerMint.innerText = `${info.deploymentConfig.tokensPerMint}`;
-  maxPerMint.innerText = `${await contract.methods.maxBatchSize().call()}`;
+  maxPerMint.innerText = `${maxBatchSize}`;
   // totalSupply.innerText = `${info.deploymentConfig.maxSupply}`;
   totalSupply.innerText = `${await contract.methods.collectionSize().call()}`;
   xsupply.innerText = `${xSupplyx}`;
-  mintInput.setAttribute("max", await contract.methods.maxBatchSize().call());
+  mintInput.setAttribute("max", maxBatchSize);
 
   // MINT INPUT
   const mintIncrement = document.getElementById("mintIncrement");
@@ -321,8 +351,9 @@ function setTotalPrice() {
     mintInput.disabled = true;
     return;
   }
+
   // const totalPriceWei = BigInt(info.deploymentConfig.mintPrice) * BigInt(mintInputValue);
-  const totalPriceWei = Number(pricePerMintRAW) * Number(mintInputValue);
+  const totalPriceWei = Number(uPrice) * Number(mintInputValue);
   
   let priceType = '';
   if(chain === 'rinkeby') {
@@ -344,7 +375,8 @@ async function mint() {
 
   const amount = parseInt(document.getElementById("mintInput").value);
   // const value = BigInt(info.deploymentConfig.mintPrice) * BigInt(amount);
-  const value = BigInt(await contract.methods.PRICE().call()) * BigInt(amount);
+  const value = Number(uPrice) * Number(amount);
+  console.log(value);
   
   // const publicMintActive = await contract.methods.mintingActive().call();
   // const presaleMintActive = await contract.methods.presaleActive().call();
@@ -375,12 +407,36 @@ async function mint() {
       var maxPriority = null;
       var maxFee = null;
 
+      // async function testFunction (maxFee, maxPriority){
+      //   const presaleMintTransactionTest = await contract.methods
+      //   .mintToMultipleAL(window.address, amount, merkleJson)
+      //   .send({ from: window.address, 
+      //           value: value.toString(),
+      //           maxFeePerGas: maxFee,
+      //           maxPriorityFeePerGas: maxPriority
+      //         });
+
+      //   return presaleMintTransactionTest;
+
+      // }
+      
+      // const presaleMintTransaction = await Web3Alc.eth.getMaxPriorityFeePerGas().then((tip) => {
+      //   Web3Alc.eth.getBlock('pending').then((block) => {
+      //     var baseFee = Number(block.baseFeePerGas);
+      //     var maxPriority = Number(tip);
+      //     var maxFee = baseFee + maxPriority;
+      //     const presaleMintTransactionx = testFunction (maxFee, maxPriority);
+
+      //     console.log("Max Fee: " + maxFee + " Max Priority: " + maxPriority)
+      //     return presaleMintTransactionx;
+      //   });
+      // });
+
+
       const presaleMintTransaction = await contract.methods
         .mintToMultipleAL(window.address, amount, merkleJson)
         .send({ from: window.address, 
-                value: value.toString(),
-                maxFeePerGas: maxFee,
-                maxPriorityFeePerGas: maxPriority
+                value: value.toString()
               });
 
       if(presaleMintTransaction) {
@@ -419,7 +475,7 @@ async function mint() {
       // console.log(e);
     }
   } else if (publicMintStatus) {
-    // PUBLIC MINT
+    // PUBLIC MINTpublicMintActive
     try {
       // const mintTransaction = await contract.methods
       //   .mint(amount)

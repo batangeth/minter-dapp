@@ -184,7 +184,7 @@ async function loadInfo() {
     publicMintStatus = true;
     presaleMintStatus = false;
 
-  } else if (publicMintActive === true && presaleMintActive === true) {
+  } else if (publicMintActive === true && presaleMintActive === true && Math.floor(Date.now() / 1000) >= presaleMintStart) {
     publicMintStatus = false;
     presaleMintStatus = true;
   }

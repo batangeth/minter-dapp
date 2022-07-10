@@ -47,6 +47,7 @@ exports.handler = async (event, context) => {
   ]
   
   let WLAddresses = [
+    "0x1249D65acc8a8f2086e1312872c48dde2AB997ef",
     "0x7Cf8B7cB6928EB879C8024BA8c172F11d8871E6B",
     "0xF023A7D4a47CE0858F2883797B8158A02d8f263d",
     "0x0aEcd559e4BDF2157d0bF0380E20dAd0535Df37D",

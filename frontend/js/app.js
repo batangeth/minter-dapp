@@ -189,6 +189,8 @@ async function loadInfo() {
   } else if (publicMintActive === true && presaleMintActive === true && Math.floor(Date.now() / 1000) >= presaleMintStart) {
     publicMintStatus = false;
     presaleMintStatus = true;
+  } else if (publicMintActive === false && presaleMintActive === false){
+    publicMintStatus = false;
   }
 
   console.log(`publicMintActive: ${publicMintActive}`)
@@ -235,6 +237,12 @@ async function loadInfo() {
       actionButton.innerText = button_presale_already_minted;
     }
     setTotalPrice();
+  } else if (!(publicMintStatus)) {
+    startTime = publicMintStart;
+    mainHeading.innerText = h1_presale_coming_soon;
+    subHeading.innerText = h2_presale_coming_soon;
+    mainText.innerText = p_presale_coming_soon;
+    actionButton.innerText = button_presale_coming_soon;
   } else {
     startTime = presaleMintStart;
     mainHeading.innerText = h1_presale_coming_soon;

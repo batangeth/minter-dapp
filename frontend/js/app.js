@@ -242,7 +242,7 @@ async function loadInfo() {
     mainHeading.innerText = h1_presale_coming_soon;
     subHeading.innerText = h2_presale_coming_soon;
     mainText.innerText = p_presale_coming_soon;
-    actionButton.innerText = button_presale_coming_soon;
+    actionButton.innerText = button_presale_already_minted;
   } else {
     startTime = presaleMintStart;
     mainHeading.innerText = h1_presale_coming_soon;
@@ -395,15 +395,10 @@ async function mint() {
       );
       const merkleJson = await merkleData.json();
 
-      var maxPriority = null;
-      var maxFee = null;
-
       const presaleMintTransaction = await contract.methods
         .mintToMultipleAL(window.address, amount, merkleJson)
         .send({ from: window.address, 
-                value: value.toString(),
-                maxFeePerGas: maxFee,
-                maxPriorityFeePerGas: maxPriority
+                value: value.toString()
               });
 
       if(presaleMintTransaction) {

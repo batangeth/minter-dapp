@@ -179,7 +179,7 @@ async function loadInfo() {
     window.pricePerMintRAW = await contract.methods.EARLY_MINT_PRICE().call()
   }
 
-  let publicMintStatus = true;
+  let publicMintStatus = "";
   let presaleMintStatus = "";
 
   if (publicMintActive === true && presaleMintActive === false){

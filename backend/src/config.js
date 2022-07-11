@@ -446,8 +446,8 @@ const layerConfigurations = [
       { name: "beth male bantaybata/hair" },
       { name: "beth male bantaybata/face" },
       { name: "beth male bantaybata/mouth" },
-      { name: "beth male bantaybata/ear" },
       { name: "beth male bantaybata/clothing" },
+      { name: "beth male bantaybata/ear" },
     ],
   },
   {
@@ -564,7 +564,7 @@ const format = {
 };
 
 const extraMetadata = {
-  external_url: "", // Replace with your website or remove this line if you do not have one.
+  external_url: "https://www.batangethereum.com/", // Replace with your website or remove this line if you do not have one.
 };
 
 // NFTPort Info

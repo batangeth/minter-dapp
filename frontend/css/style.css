@@ -23,6 +23,15 @@
   box-sizing: border-box;
 }
 
+/* body {
+  background-color: var(--bg-color);
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+  color: var(--font-color);
+  font-family: var(--font-primary);
+} */
+
 body {
   background-color: var(--bg-color);
   display: flex;
@@ -30,6 +39,24 @@ body {
   height: 100vh;
   color: var(--font-color);
   font-family: var(--font-primary);
+}
+
+.bg {
+  /* The image used */
+  background-image: url("../images/BG.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-gradient {
+  background: rgb(3,49,109);
+  background: linear-gradient(90deg, rgba(3,49,109,1) 0%, rgba(70,124,164,1) 80%, rgba(19,62,115,1) 100%);
 }
 
 .container {

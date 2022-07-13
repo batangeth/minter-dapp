@@ -196,6 +196,10 @@ async function loadInfo() {
   console.log(`publicMintActive: ${publicMintActive}`)
   console.log(`presaleMintActive: ${presaleMintActive}`)
 
+  console.log(`publicMintActive: ${publicMintStatus}`)
+  console.log(`presaleMintActive: ${presaleMintStatus}`)
+
+
   let startTime = "";
   if (publicMintStatus) {
     mainHeading.innerText = h1_public_mint;

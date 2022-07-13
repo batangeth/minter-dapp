@@ -75,8 +75,7 @@ async function main() {
       "file_url": metaData.image,
       "external_url": metaData?.external_url,
       "custom_fields": {
-        "date": metaData.date,
-        "compiler": "HashLips Art Engine - codeSTACKr Modified"
+        "date": metaData.date
       }
     }
 

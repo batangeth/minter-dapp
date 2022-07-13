@@ -33,7 +33,11 @@
 } */
 
 body {
+  background-image: url("../images/BG.jpg");
   background-color: var(--bg-color);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-flow: column;
   height: 100vh;
@@ -41,18 +45,13 @@ body {
   font-family: var(--font-primary);
 }
 
-.bg {
-  /* The image used */
+/* .bg {
   background-image: url("../images/BG.jpg");
-
-  /* Full height */
   height: 100%; 
-
-  /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .bg-gradient {
   background: rgb(3,49,109);

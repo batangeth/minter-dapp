@@ -260,7 +260,7 @@ async function loadInfo() {
     } else {
       startTime = publicMintStart;
       mainHeading.innerText = h1_presale_coming_soon;
-      subHeading.innerText = h2_presale_coming_soon;
+      subHeading.innerText = h2_public_coming_soon;
       mainText.innerText = p_presale_coming_soon;
       actionButton.innerText = button_presale_already_minted;
     }

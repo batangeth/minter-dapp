@@ -199,8 +199,8 @@ async function loadInfo() {
   console.log(`publicMintActive: ${publicMintActive}`)
   console.log(`presaleMintActive: ${presaleMintActive}`)
 
-  console.log(`publicMintActive: ${publicMintStatus}`)
-  console.log(`presaleMintActive: ${presaleMintStatus}`)
+  console.log(`publicMintStatus: ${publicMintStatus}`)
+  console.log(`presaleMintStatus: ${presaleMintStatus}`)
 
 
   let startTime = "";

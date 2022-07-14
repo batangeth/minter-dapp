@@ -393,7 +393,7 @@ async function mint() {
   const publicMintActive = await contract.methods.mintingOpen().call();
   const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
   const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
-  
+
   if (usingEarlyMintIncentive){
     value = BigInt(await contract.methods.EARLY_MINT_PRICE().call()) * BigInt(amount);
   }
@@ -419,7 +419,7 @@ async function mint() {
       const merkleJson = await merkleData.json();
 
       const presaleMintTransaction = await contract.methods
-        .mintToMultipleAL(window.address, amount, merkleJson)
+        .mintToMultipleOG(window.address, amount, merkleJson)
         .send({ from: window.address, 
                 value: value.toString()
               });

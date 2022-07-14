@@ -168,6 +168,7 @@ async function loadInfo() {
   const mintContainer = document.getElementById("mintContainer");
   const mintButton = document.getElementById("mintButton");
   const spinner = document.getElementById("spinner");
+  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
 
   const publicMintStart =  await contract.methods.publicDropTime().call();
   const presaleMintStart = await contract.methods.allowlistDropTime().call();
@@ -175,7 +176,7 @@ async function loadInfo() {
   window.maxBatchSize = await contract.methods.maxBatchSize().call();
   window.pricePerMintRAW = await contract.methods.PRICE().call()
 
-  if (presaleMintActive){
+  if (usingEarlyMintIncentive){
     window.pricePerMintRAW = await contract.methods.EARLY_MINT_PRICE().call()
   }
 
@@ -247,7 +248,7 @@ async function loadInfo() {
       mainText.innerText = p_presale_coming_soon;
       actionButton.innerText = button_presale_already_minted;
     }
-  } if (publicMintStatus) {
+  } else if (publicMintStatus) {
     const publicSaleDropTimePassed = timeNow > publicMintStart;
 
     if (publicSaleDropTimePassed){

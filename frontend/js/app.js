@@ -264,11 +264,6 @@ async function loadInfo() {
       mainText.innerText = p_presale_coming_soon;
       actionButton.innerText = button_presale_already_minted;
     }
-  } else if (!(publicMintStatus)) {
-    mainHeading.innerText = h1_presale_coming_soon;
-    subHeading.innerText = h2_no_active_minting;
-    mainText.innerText = p_presale_coming_soon;
-    actionButton.innerText = button_presale_already_minted;
   } else {
     startTime = presaleMintStart;
     mainHeading.innerText = h1_presale_coming_soon;

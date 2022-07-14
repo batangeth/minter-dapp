@@ -193,7 +193,7 @@ async function loadInfo() {
     presaleMintStatus = true;
   } else if (publicMintActive === false && presaleMintActive === false){
     publicMintStatus = false;
-    publicMintStatus = false;
+    presaleMintStatus = false;
   }
 
   console.log(`publicMintActive: ${publicMintActive}`)

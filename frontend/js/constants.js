@@ -9,6 +9,7 @@ const h1_presale_mint = "Pre-Sale Minting Open!!";
 const h1_public_mint = "Public Minting Open!!";
 const h2_presale_coming_soon = "Pre-Sale Minting Countdown";
 const h2_public_coming_soon = "Public Minting Countdown";
+const h2_no_active_minting = "No Active Minting";
 const h2_presale_mint = "Public Minting Countdown";
 const h2_public_mint = "Public Minting Countdown";
 const p_presale_coming_soon = "We are working hard to launch the NFT Collection. Stay tuned for updates!";

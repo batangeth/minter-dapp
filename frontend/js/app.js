@@ -181,15 +181,18 @@ async function loadInfo() {
 
   let publicMintStatus = "";
   let presaleMintStatus = "";
+  const timeNow = Math.floor(Date.now() / 1000);
+
 
   if (publicMintActive === true && presaleMintActive === false){
     publicMintStatus = true;
     presaleMintStatus = false;
 
-  } else if (publicMintActive === true && presaleMintActive === true && Math.floor(Date.now() / 1000) >= presaleMintStart) {
+  } else if (publicMintActive === true && presaleMintActive === true) {
     publicMintStatus = false;
     presaleMintStatus = true;
   } else if (publicMintActive === false && presaleMintActive === false){
+    publicMintStatus = false;
     publicMintStatus = false;
   }
 
@@ -201,46 +204,66 @@ async function loadInfo() {
 
 
   let startTime = "";
-  if (publicMintStatus) {
-    mainHeading.innerText = h1_public_mint;
-    mainText.innerText = p_public_mint;
-    actionButton.classList.add('hidden');
-    mintButton.innerText = button_public_mint;
-    mintContainer.classList.remove('hidden');
-    setTotalPrice();
-  } else if (presaleMintStatus) {
+  if (presaleMintStatus) {
     startTime = publicMintStart;
     mainHeading.innerText = h1_presale_mint;
     subHeading.innerText = h2_presale_mint;
     
-    try {
-      // CHECK IF WHITELISTED
-      const merkleData = await fetch(
-        `/.netlify/functions/merkleTree/?wallet=${window.address}`
-      );
-      const merkleJson = await merkleData.json();
-      const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
-      if(!whitelistClaimed){
-        const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
-        if(!whitelisted) {
-          mainText.innerText = p_presale_mint_not_whitelisted;
-          actionButton.innerText = button_presale_mint_not_whitelisted;
+    const preSaleDropTimePassed = timeNow > presaleMintStart;
+
+    if (preSaleDropTimePassed){
+      try {
+        // CHECK IF WHITELISTED
+        const merkleData = await fetch(
+          `/.netlify/functions/merkleTree/?wallet=${window.address}`
+        );
+        const merkleJson = await merkleData.json();
+        const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
+        if(!whitelistClaimed){
+          const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
+          if(!whitelisted) {
+            mainText.innerText = p_presale_mint_not_whitelisted;
+            actionButton.innerText = button_presale_mint_not_whitelisted;
+          } else {
+            mainText.innerText = p_presale_mint_whitelisted;
+            actionButton.classList.add('hidden');
+            mintButton.innerText = button_presale_mint_whitelisted;
+            mintContainer.classList.remove('hidden');
+          }
         } else {
-          mainText.innerText = p_presale_mint_whitelisted;
-          actionButton.classList.add('hidden');
-          mintButton.innerText = button_presale_mint_whitelisted;
-          mintContainer.classList.remove('hidden');
+          mainText.innerText = p_presale_mint_already_minted;
+          actionButton.innerText = button_presale_already_minted;
         }
-      } else {
+      } catch(e) {
+        console.log(e);
         mainText.innerText = p_presale_mint_already_minted;
         actionButton.innerText = button_presale_already_minted;
       }
-    } catch(e) {
-      console.log(e);
-      mainText.innerText = p_presale_mint_already_minted;
+      setTotalPrice();
+    } else {
+      startTime = presaleMintStart;
+      mainHeading.innerText = h1_presale_coming_soon;
+      subHeading.innerText = h2_presale_coming_soon;
+      mainText.innerText = p_presale_coming_soon;
       actionButton.innerText = button_presale_already_minted;
     }
-    setTotalPrice();
+  } if (publicMintStatus) {
+    const publicSaleDropTimePassed = timeNow > publicMintStart;
+
+    if (publicSaleDropTimePassed){
+      mainHeading.innerText = h1_public_mint;
+      mainText.innerText = p_public_mint;
+      actionButton.classList.add('hidden');
+      mintButton.innerText = button_public_mint;
+      mintContainer.classList.remove('hidden');
+      setTotalPrice();
+    } else {
+      startTime = publicMintStart;
+      mainHeading.innerText = h1_presale_coming_soon;
+      subHeading.innerText = h2_presale_coming_soon;
+      mainText.innerText = p_presale_coming_soon;
+      actionButton.innerText = button_presale_already_minted;
+    }
   } else if (!(publicMintStatus)) {
     startTime = publicMintStart;
     mainHeading.innerText = h1_presale_coming_soon;

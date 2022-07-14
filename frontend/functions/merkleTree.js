@@ -47,6 +47,7 @@ exports.handler = async (event, context) => {
   ]
   
   let WLAddresses = [
+    "0xb4a9391C658bc1d5a4fd7928c5306d16046141f8",
     "0x1249D65acc8a8f2086e1312872c48dde2AB997ef",
     "0x7Cf8B7cB6928EB879C8024BA8c172F11d8871E6B",
     "0xF023A7D4a47CE0858F2883797B8158A02d8f263d",
@@ -213,7 +214,7 @@ exports.handler = async (event, context) => {
   ];
 
   const wallet = event.queryStringParameters && event.queryStringParameters.wallet
-  const leafNodes = OGAddresses.map(addr => keccak256(addr));
+  const leafNodes = WLAddresses.map(addr => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
   const claimingAddress = keccak256(wallet);
   const hexProof = merkleTree.getHexProof(claimingAddress);

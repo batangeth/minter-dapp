@@ -294,7 +294,7 @@ async function loadInfo() {
   }
   // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
   let price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
-  if (presaleMintActive){
+  if (usingEarlyMintIncentive){
     price = web3.utils.fromWei(await contract.methods.EARLY_MINT_PRICE().call(), 'ether'); 
   }
   const pricePerMint = document.getElementById("pricePerMint");
@@ -393,7 +393,7 @@ async function mint() {
   const publicMintActive = await contract.methods.mintingOpen().call();
   const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
 
-  if (presaleMintActive){
+  if (usingEarlyMintIncentive){
     value = BigInt(await contract.methods.EARLY_MINT_PRICE().call()) * BigInt(amount);
   }
 

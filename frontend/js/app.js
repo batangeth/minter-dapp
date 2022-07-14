@@ -108,6 +108,8 @@ async function checkChain() {
     chainId = 4;
   } else if(chain === 'polygon') {
     chainId = 137;
+  } else if(chain === 'ethereum') {
+    chainId = 1;
   }
   if (window.ethereum.networkVersion !== chainId) {
     try {
@@ -144,7 +146,19 @@ async function checkChain() {
                 },
               ],
             });
-          }
+          } else if(chain === 'ethereum') {
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainName: 'Ethereum Mainnet',
+                  chainId: web3.utils.toHex(chainId),
+                  nativeCurrency: { name: 'ETH', decimals: 18, symbol: 'ETH' },
+                  rpcUrls: [''],
+                },
+              ],
+            });
+          } 
           updateConnectStatus();
         } catch (err) {
           console.log(err);
@@ -293,6 +307,8 @@ async function loadInfo() {
     priceType = 'ETH';
   } else if (chain === 'polygon') {
     priceType = 'MATIC';
+  } else if (chain === 'ethereum') {
+    priceType = 'ETH';
   }
   // const price = web3.utils.fromWei(info.deploymentConfig.mintPrice, 'ether');
   let price = web3.utils.fromWei(await contract.methods.PRICE().call(), 'ether');
@@ -371,6 +387,8 @@ function setTotalPrice() {
     priceType = 'ETH';
   } else if (chain === 'polygon') {
     priceType = 'MATIC';
+  } else if (chain === 'ethereum') {
+    priceType = 'ETH';
   }
   const price = web3.utils.fromWei(totalPriceWei.toString(), 'ether');
   totalPrice.innerText = `${price} ${priceType}`;
@@ -443,7 +461,16 @@ async function mint() {
           mintedTxnBtn.href = url;
           countdownContainer.classList.add('hidden');
           mintedContainer.classList.remove('hidden');
+        } else if (chain === 'ethereum') {
+          const url = `https://etherscan.io/tx/${presaleMintTransaction.transactionHash}`;
+          const mintedContainer = document.querySelector('.minted-container');
+          const countdownContainer = document.querySelector('.countdown');
+          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+          mintedTxnBtn.href = url;
+          countdownContainer.classList.add('hidden');
+          mintedContainer.classList.remove('hidden');
         }
+
         console.log("Minuted successfully!", `Transaction Hash: ${presaleMintTransaction.transactionHash}`);
       } else {
         const mainText = document.getElementById("mainText");
@@ -483,6 +510,14 @@ async function mint() {
           mintedContainer.classList.remove('hidden');
         } else if (chain === 'rinkeby') {
           const url = `https://rinkeby.etherscan.io/tx/${mintTransaction.transactionHash}`;
+          const mintedContainer = document.querySelector('.minted-container');
+          const countdownContainer = document.querySelector('.countdown');
+          const mintedTxnBtn = document.getElementById("mintedTxnBtn");
+          mintedTxnBtn.href = url;
+          countdownContainer.classList.add('hidden');
+          mintedContainer.classList.remove('hidden');
+        } else if (chain === 'ethereum') {
+          const url = `https://etherscan.io/tx/${mintTransaction.transactionHash}`;
           const mintedContainer = document.querySelector('.minted-container');
           const countdownContainer = document.querySelector('.countdown');
           const mintedTxnBtn = document.getElementById("mintedTxnBtn");

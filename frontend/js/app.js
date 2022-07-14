@@ -392,7 +392,8 @@ async function mint() {
 
   const publicMintActive = await contract.methods.mintingOpen().call();
   const presaleMintActive = await contract.methods.onlyAllowlistMode().call();
-
+  const usingEarlyMintIncentive = await contract.methods.usingEarlyMintIncentive().call();
+  
   if (usingEarlyMintIncentive){
     value = BigInt(await contract.methods.EARLY_MINT_PRICE().call()) * BigInt(amount);
   }

@@ -419,7 +419,7 @@ async function mint() {
       const merkleJson = await merkleData.json();
 
       const presaleMintTransaction = await contract.methods
-        .mintToMultipleOG(window.address, amount, merkleJson)
+        .mintToMultipleFM(window.address, amount, merkleJson)
         .send({ from: window.address, 
                 value: value.toString()
               });

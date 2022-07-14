@@ -222,7 +222,7 @@ async function loadInfo() {
         const whitelistClaimed = await contract.methods.whitelistClaimed(window.address).call();
         const OGClaimed = await contract.methods.OGClaimed(window.address).call();
         const FMClaimed = await contract.methods.freeMintClaimed(window.address).call();
-        if(!FMClaimed){
+        if(!OGClaimed){
           const whitelisted = await contract.methods.isAllowlisted(window.address, merkleJson).call();
           if(!whitelisted) {
             mainText.innerText = p_presale_mint_not_whitelisted;
@@ -421,7 +421,7 @@ async function mint() {
       const merkleJson = await merkleData.json();
 
       const presaleMintTransaction = await contract.methods
-        .mintToMultipleFM(window.address, amount, merkleJson)
+        .mintToMultipleOG(window.address, amount, merkleJson)
         .send({ from: window.address, 
                 value: value.toString()
               });

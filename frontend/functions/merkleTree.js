@@ -215,7 +215,7 @@ exports.handler = async (event, context) => {
   ];
 
   const wallet = event.queryStringParameters && event.queryStringParameters.wallet
-  const leafNodes = FMAddresses.map(addr => keccak256(addr));
+  const leafNodes = OGAddresses.map(addr => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
   const claimingAddress = keccak256(wallet);
   const hexProof = merkleTree.getHexProof(claimingAddress);

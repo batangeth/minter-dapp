@@ -439,7 +439,7 @@ async function mint() {
       const merkleJson = await merkleData.json();
 
       const presaleMintTransaction = await contract.methods
-        .mintToMultipleWL(window.address, amount, merkleJson)
+        .mintToMultipleAL(window.address, amount, merkleJson)
         .send({ from: window.address, 
                 value: value.toString()
               });

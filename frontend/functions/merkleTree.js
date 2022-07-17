@@ -3,6 +3,7 @@ const keccak256 = require('keccak256');
 
 exports.handler = async (event, context) => {
   let FMAddresses = [
+    "0x7e1b952D601997CfcD3F2877b75dE15924C76bCD",
     "0xe7942Ac2d0B51E6974D140757E50C35B38fa5545",
     "0x3E32c70B82F79DD243dcd32AE9231C2c19f5ae23",
     "0xEb0c6CB1C26806b4A933525f2325514a6C67eeb9",

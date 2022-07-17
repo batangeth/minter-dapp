@@ -3,6 +3,19 @@ const keccak256 = require('keccak256');
 
 exports.handler = async (event, context) => {
   let FMAddresses = [
+    "0xe7942Ac2d0B51E6974D140757E50C35B38fa5545",
+    "0x3E32c70B82F79DD243dcd32AE9231C2c19f5ae23",
+    "0xEb0c6CB1C26806b4A933525f2325514a6C67eeb9",
+    "0x904586BDE75ab731d6F68A76e22bDE7DF79A4C90",
+    "0x33f3d0AA90499e785d02bfB8F15c64FAEAd96771",
+    "0x0C166B32C2062bC4000F5ffeD6a8f35C60E9F5F0",
+    "0x845d177deFe0BCF5E2A6678351afec329f1FE005",
+    "0x032e289000072247Ad7ecF8cD606da0FF6A402F2",
+    "0xdef26823e302432F34D8556F69B89bdf460fe088",
+    "0xfE2E6596DF285A5Bd9EBDa40A6e24c46741294Ad",
+    "0x1DDd2a4647262E096fb5E8D5947eAcFD0100C204",
+    "0xA4B1a45Ca22205D3c2EF4b21bc464eCa2046605A",
+    "0xB93A1D9C5c8be154f5b3F99451ecF9265b8F5aF6",
     "0xb4a9391C658bc1d5a4fd7928c5306d16046141f8",
     "0x53f45E5A30BD5bD71189e353B5Add3D1f3C7AC29",
     "0x32029DBC69baBc56eF10f5451Db10d4Ac896197B",
@@ -811,7 +824,7 @@ exports.handler = async (event, context) => {
   ];
 
   const wallet = event.queryStringParameters && event.queryStringParameters.wallet
-  const leafNodes = WLAddresses.map(addr => keccak256(addr));
+  const leafNodes = FMAddresses.map(addr => keccak256(addr));
   const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true});
   const claimingAddress = keccak256(wallet);
   const hexProof = merkleTree.getHexProof(claimingAddress);

@@ -84,14 +84,14 @@ const App = ({ isServerInfo }) => {
       </Header>
       <Router>
           <Switch>
-            <Route exact path="/homepage">
+            <Route exact path="/">
               <HomePage isServerInfo={isServerInfo} />
             </Route>
             <Route path="/">
-              <Redirect to="/homepage" />
+              <Redirect to="/" />
             </Route>
             <Route path="/ethereum-boilerplate">
-              <Redirect to="/homepage" />
+              <Redirect to="/" />
             </Route>
           </Switch>
       </Router>

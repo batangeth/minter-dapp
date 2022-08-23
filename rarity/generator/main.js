@@ -1,5 +1,5 @@
 const Moralis = require("moralis/node");
-const { timer } = require("rxjs");
+const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const serverUrl = "https://zxcx8wsmj6zl.usemoralis.com:2053/server"; //Moralis Server Url here
 const appId = "Gwc3nrOnTHuZ0sMfEcWeIbAGcwtcHHy6PatOZYzc"; //Moralis Server App ID here
@@ -24,24 +24,27 @@ async function generateRarity() {
   console.log(totalNum);
   console.log(pageSize);
   let allNFTs = NFTs.result;
-
+  
+  await timer(1000);
 
   // --------------------------------------------->>>>>>>>>>>>>>>>>>
   let cursor = null;
   do {
     const response = await Moralis.Web3API.token.getAllTokenIds({
       address: collectionAddress,
-      chain: "rinkeby",
+      chain: "eth",
       limit: 100,
       cursor: cursor,
     });
     allNFTs = allNFTs.concat(response.result);
     cursor = response.cursor;
+    await timer(1000);
   } while (cursor != "" && cursor != null);
 // --------------------------------------------->>>>>>>>>>>>>>>>>>
 
-  // const timer = (ms) => new Promise((res) => setTimeout(res, ms));
-
+  console.log("END OF DO WHILE!>>>>>>>>>>")
+  
+  
   // for (let i = pageSize; i < totalNum; i = i + pageSize) {
   //   const NFTs = await Moralis.Web3API.token.getAllTokenIds({
   //     address: collectionAddress,
@@ -51,7 +54,7 @@ async function generateRarity() {
   //   await timer(6000);
   // }
 
-  console.log(allNFTs)
+  // console.log(allNFTs)
 
   // ----------------------------------------------------------------------------->>>>>>>>
   // let noAttr = [];
@@ -70,14 +73,15 @@ async function generateRarity() {
     //       address: collectionAddress, 
     //       token_id: xtoken_id, 
     //       flag: "uri",
-    //       chain: "polygon",
+    //       chain: "eth",
     //     };
     
     //     const NFTLowestPrice = await Moralis.Web3API.token.reSyncMetadata(options);
+
     //   } catch (error) {
     //     console.log("reSyncMetadata error", error);
     //   }
-    //   await timer(2500);
+    //   await timer(6000);
     // }
 
   //   if(!(xmdata.hasOwnProperty('attributes'))) {
@@ -98,7 +102,7 @@ async function generateRarity() {
   //     } catch (error) {
   //       console.log("reSyncMetadata error", error);
   //     }
-  //     await timer(2500);
+  //     await timer(6000);
   //   }
   // }
 
@@ -106,15 +110,16 @@ async function generateRarity() {
 
 
   // ----------------------------------------------------------------------------->>>>>>>>
+  let metadata = allNFTs.map((e) => JSON.parse(e.metadata).attributes);
 
-  // let metadata = allNFTs.map((e) => JSON.parse(e.metadata).attributes);
+  let tally = { TraitCount: {} };
 
-  // let tally = { TraitCount: {} };
+  console.log(metadata.length)
 
   // for (let j = 0; j < metadata.length; j++) {
   //   let nftTraits = metadata[j].map((e) => e.trait_type);
   //   let nftValues = metadata[j].map((e) => e.value);
-
+    
   //   let numOfTraits = nftTraits.length;
 
   //   if (tally.TraitCount[numOfTraits]) {
@@ -178,20 +183,25 @@ async function generateRarity() {
   //     });
   //   }
 
-  //   if (allNFTs[j].metadata) {
-  //     allNFTs[j].metadata = JSON.parse(allNFTs[j].metadata);
-  //     allNFTs[j].image = resolveLink(allNFTs[j].metadata.image);
-  //   } else if (allNFTs[j].token_uri) {
-  //     try {
-  //       await fetch(allNFTs[j].token_uri)
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           allNFTs[j].image = resolveLink(data.image);
-  //         });
-  //     } catch (error) {
-  //       console.log(error);
+  //   try {
+  //     if (allNFTs[j].metadata) {
+  //       allNFTs[j].metadata = JSON.parse(allNFTs[j].metadata);
+  //       allNFTs[j].image = resolveLink(allNFTs[j].metadata.image);
+  //     } else if (allNFTs[j].token_uri) {
+  //       try {
+  //         await fetch(allNFTs[j].token_uri)
+  //           .then((response) => response.json())
+  //           .then((data) => {
+  //             allNFTs[j].image = resolveLink(data.image);
+  //           });
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
   //     }
+  //   } catch (error) {
+  //     console.log(error);
   //   }
+    
 
   //   nftArr.push({
   //     Attributes: current,

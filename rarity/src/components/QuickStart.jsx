@@ -109,6 +109,7 @@ function HomePage() {
                                 placeholder="Select Collection"
                                 onChange={(e) => collectionChanged(e)}
                               >
+                          <Option value="BatangEthereum" >Batang Ethereum</Option>
                           <Option value="BATANG_ETH_MINI_NFT" >Batang Mini</Option>
                       </Select>
                       </div>

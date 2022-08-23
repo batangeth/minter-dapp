@@ -75,7 +75,7 @@ const App = ({ isServerInfo }) => {
           <Nav className="ms-auto">
             <Nav.Link href="https://twitter.com/Batang_ETH">Twitter</Nav.Link>
             <Nav.Link href="https://discord.gg/batangeth">Discord</Nav.Link>
-            <Nav.Link href="https://opensea.io/collection/batang-eth-mini-nft">Opensea</Nav.Link>
+            <Nav.Link href="https://opensea.io/collection/batang-ethereum">Opensea</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         </Container>
